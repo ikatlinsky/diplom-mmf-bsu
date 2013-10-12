@@ -1,0 +1,15 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "/home/ikatlinsky/Documents/latex",
+			"file_exclude_patterns": [
+				"*.log",
+				"*.aux",
+				"*.toc",
+				"*.pdf"
+			]
+		}
+	]
+}

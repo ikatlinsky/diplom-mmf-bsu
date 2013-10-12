@@ -1,0 +1,345 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "DiplomProject.tex",
+			"settings":
+			{
+				"buffer_size": 1191,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "RSA/DiplomProject-RSA.tex",
+			"settings":
+			{
+				"buffer_size": 185,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "PrimeNumbers/DiplomProject-PrimeNumbers.tex",
+			"settings":
+			{
+				"buffer_size": 129,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "DipomProject-FactorizationProblem.tex",
+			"settings":
+			{
+				"buffer_size": 113,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/User/tex.sublime-build",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"SSLA",
+				"Set Syntax: LaTeX"
+			],
+			[
+				"IP",
+				"Package Control: Install Package"
+			],
+			[
+				"SSL",
+				"Set Syntax: Lua"
+			],
+			[
+				"SSLa",
+				"Set Syntax: LaTeX"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"PCI",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 146.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())",
+			" import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/ikatlinsky/Documents/latex/Conclusion/DiplomProject-Conclusion.tex",
+		"/home/ikatlinsky/Documents/latex/RSA/DiplomProject-RSACryptanalysis.tex",
+		"/home/ikatlinsky/Documents/latex/RSA/DiplomProject-RSAAttacks.tex",
+		"/home/ikatlinsky/Documents/latex/RSA/DiplomProject-RSAFundamentals.tex",
+		"/home/ikatlinsky/Documents/latex/DiplomProject-RSA.tex",
+		"/home/ikatlinsky/Documents/latex/DiplomProject-Conclusion.tex",
+		"/home/ikatlinsky/Documents/latex/DiplomProject-PrimeNumbers.tex",
+		"/home/ikatlinsky/Documents/latex/DiplomProject-BigNumbers.tex",
+		"/home/ikatlinsky/Documents/latex/DipomProject-FactorizationProblem.tex",
+		"/home/ikatlinsky/Documents/latex/DiplomProject-RSAApplication.tex",
+		"/home/ikatlinsky/Documents/latex/DiplomProject-RSAAttacks.tex",
+		"/home/ikatlinsky/Documents/latex/DiplomProject-RSACryptanalysis.tex",
+		"/home/ikatlinsky/Documents/latex/DiplomProject-RSAFundamentals.tex",
+		"/home/ikatlinsky/Documents/latex/DiplomProject-Introduction.tex",
+		"/home/ikatlinsky/Downloads/test.nb",
+		"/home/ikatlinsky/Documents/latex/diplom.sublime-project",
+		"/home/ikatlinsky/Documents/latex/DiplomProject-ProblemFormulation.tex",
+		"/home/ikatlinsky/Documents/latex/DiplomProject-RSAApplication.log",
+		"/home/ikatlinsky/Documents/latex/DiplomProject-Title.tex",
+		"/home/ikatlinsky/.config/sublime-text-3/Packages/User/tex.sublime-build"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"}\n",
+			"log",
+			"из"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "DiplomProject.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1191,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								352,
+								352
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "RSA/DiplomProject-RSA.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 185,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								156,
+								156
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "PrimeNumbers/DiplomProject-PrimeNumbers.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 129,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								95,
+								95
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "DipomProject-FactorizationProblem.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 113,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								33,
+								33
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 300.0
+	},
+	"project": "diplom.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 264.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -1,0 +1,42 @@
+\documentclass[14pt]{extreport}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amssymb,amsfonts,amsmath,mathtext,cite,enumerate,float} 
+\usepackage[dvips]{graphicx}
+\usepackage{fixltx2e}
+\usepackage{titlesec}
+\graphicspath{{images/}}
+
+\makeatletter
+\renewcommand{\@biblabel}[1]{#1.}
+\makeatother
+
+\usepackage{geometry}
+\geometry{left=2cm}
+\geometry{right=1cm}
+\geometry{top=1.5cm}
+\geometry{bottom=2cm}
+
+\renewcommand{\theenumi}{\arabic{enumi}}
+\renewcommand{\labelenumi}{\arabic{enumi}}
+\renewcommand{\theenumii}{.\arabic{enumii}}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+\renewcommand{\theenumiii}{.\arabic{enumiii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}
+\renewcommand{\baselinestretch}{1.25}
+
+% \titleformat{\chapter}[display]
+% 	{\bfseries\Large}
+% 	{\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}
+
+\begin{document}
+\input{DiplomProject-Title}
+
+\tableofcontents
+
+\input{./Introduction/DiplomProject-Introduction}
+\input{./PrimeNumbers/DiplomProject-PrimeNumbers}
+\input{./RSA/DiplomProject-RSA}
+\input{./Conclusion/DiplomProject-Conclusion}
+\end{document}
