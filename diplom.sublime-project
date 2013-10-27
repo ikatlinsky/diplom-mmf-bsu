@@ -3,7 +3,7 @@
 	[
 		{
 			"follow_symlinks": true,
-			"path": "/home/ikatlinsky/Documents/latex",
+			"path": "/home/ikatlinsky/Documents/Diplom-MMF-2014",
 			"file_exclude_patterns": [
 				"*.log",
 				"*.aux",

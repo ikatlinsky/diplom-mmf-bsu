@@ -11,7 +11,7 @@
 			"file": "DiplomProject.tex",
 			"settings":
 			{
-				"buffer_size": 1191,
+				"buffer_size": 1189,
 				"line_ending": "Unix"
 			}
 		},
@@ -159,15 +159,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1191,
+						"buffer_size": 1189,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								352,
-								352
+								351,
+								351
 							]
 						],
 						"settings":
