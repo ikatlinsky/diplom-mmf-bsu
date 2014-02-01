@@ -2,7 +2,7 @@
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
-\usepackage{amssymb,amsfonts,amsmath,mathtext,cite,enumerate,float} 
+\usepackage{amssymb,amsfonts,amsmath,mathtext,cite,enumerate,float,amsthm} 
 \usepackage[dvips]{graphicx}
 \usepackage{fixltx2e}
 \usepackage{titlesec}
@@ -25,6 +25,16 @@
 \renewcommand{\theenumiii}{.\arabic{enumiii}}
 \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}
 \renewcommand{\baselinestretch}{1.25}
+
+\numberwithin{equation}{section}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{lemma}{Лемма}[section]
+\newtheorem{cons}{Следствие}[section]
+\newtheorem{definition}{Определение}[section]
+\newtheorem{example}{Пример}[section]
+\newtheorem{statement}{Утверждение}[section]
 
 \titleformat{\chapter}[display]
     {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}

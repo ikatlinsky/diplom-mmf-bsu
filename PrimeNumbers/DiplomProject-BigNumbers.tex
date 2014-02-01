@@ -24,7 +24,7 @@
 \end{equation}
 делится на \textit{n}. Обращение этого свойства можно использовать, чтобы отличать составные числа от простых.
 
-Пусть \textit{n} - нечётное составное число, \textit{n - 1 = 2\textsubscript{s} t}, где \textit{t} нечётно. Назовем целое число \textit{a},
+Пусть \textit{n} - нечётное составное число, \textit{n - 1 = 2\textsuperscript{s} t}, где \textit{t} нечётно. Назовем целое число \textit{a},
 \textit{1 < a < n}, «хорошим» для \textit{n}, если нарушается одно из двух условий: 
 \begin{enumerate}
  \item \textit{n} не делится на \textit{a};
@@ -42,26 +42,38 @@
 
 \paragraph{} Перед описанием некоторых алгоритмов и тестов на простоту чисел введем определения и утверждения
 
-  \textbf{Определение.} Пусть \textit{n} {$\in$} \textit{N} нечетное число и \textit{n – 1 = 2\textsuperscript{ s} t}, \textit{t} – нечетное,
-число \textit{a} {$\in$} \textit{N}, такое, что \textit{0 < a < n}, называется свидетелем 
-простоты числа \textit{n}, если выполнены 2 условия:
+  \begin{definition}    
+  
+      Пусть \textit{n} {$\in$} \textit{N} нечетное число и \textit{n – 1 = 2\textsuperscript{ s} t}, \textit{t} – нечетное,
+    число \textit{a} {$\in$} \textit{N}, такое, что \textit{0 < a < n}, называется свидетелем 
+    простоты числа \textit{n}, если выполнены 2 условия:
 
-  \begin{enumerate}
-    \item \textit{(a, n) = 1}
-    \item Справедливо хотя бы одно {$\in$} сравнений \textit{a\textsuperscript{ t} {$\equiv$} 1 (mod n)}, 
-\textit{a\textsuperscript{ t} {$\equiv$} -1 (mod n)}, \textit{a\textsuperscript{ 2 t} {$\equiv$} -1(mod n)},
-{$\dots$}, \textit{a\textsuperscript{ t 2\textsuperscript{ s-1}} {$\equiv$} -1(mod n)}
-  \end{enumerate}
+    \begin{enumerate}
+      \item \textit{(a, n) = 1}
+      \item Справедливо хотя бы одно {$\in$} сравнений \textit{a\textsuperscript{ t} {$\equiv$} 1 (mod n)}, 
+  \textit{a\textsuperscript{ t} {$\equiv$} -1 (mod n)}, \textit{a\textsuperscript{ 2 t} {$\equiv$} -1(mod n)},
+  {$\dots$}, \textit{a\textsuperscript{ t 2\textsuperscript{ s-1}} {$\equiv$} -1(mod n)}
+    \end{enumerate}
+  
+  \end{definition}
 
-  \textbf{Определение.} Составное число \textit{n} {$\in$} \textit{N} называется сильно псевдопростым по основанию \textit{a} 
-{$\in$} \textit{Z\textsubscript{ n}}, если число \textit{a} является свидетелем простоты числа \textit{n}.
+  \begin{definition}    
+  
+      Составное число \textit{n} {$\in$} \textit{N} называется сильно псевдопростым по основанию \textit{a} 
+    {$\in$} \textit{Z\textsubscript{ n}}, если число \textit{a} является свидетелем простоты числа \textit{n}.
+    
+  \end{definition}
 
-  \textbf{Утверждение.} Пусть \textit{a}, \textit{n} {$\in$} \textit{N}, \textit{0 < a < n}, если число a не является свидетелем 
-простоты числа \textit{n}, то \textit{n} - составное
+  \begin{statement}   
+  
+      Пусть \textit{a}, \textit{n} {$\in$} \textit{N}, \textit{0 < a < n}, если число a не является свидетелем 
+    простоты числа \textit{n}, то \textit{n} - составное.
+    
+  \end{statement}
 
 \subsubsection{Тест на свидетельство простоты}
 
-\paragraph{}Пусть даны 2 числа \textit{a}, \textit{n} {$\in$} \textit{N}, \textit{n} – нечетное, \textit{n - 1 = 2\textsuperscript{ s} t}, 
+\paragraph{} Пусть даны 2 числа \textit{a}, \textit{n} {$\in$} \textit{N}, \textit{n} – нечетное, \textit{n - 1 = 2\textsuperscript{ s} t}, 
 \textit{t} – нечетное, необходимо проверить, является ли число \textit{а} свидетелем простоты числа \textit{n}.
 
   \begin{enumerate}
@@ -104,23 +116,104 @@
 непростоты \textit{n}. Завершаем тест с сообщением «число n – составное». Если после \textit{r} проверок окажется \textit{r} свидетелей
 простоты, то заканчиваем тест с сообщением «n – вероятно простое».
 
-\paragraph{} \textbf{Утверждение.} Тест Миллера-Рабина определяет, что \textit{n} {$\in$} \textit{N} – простое с вероятностью
-\textit{1 - 4\textsuperscript{ -k}} менее, чем за \textit{8 k N} арифметических операций, где \textit{N = {$\log_{2}{n}$} +1 }
+  \begin{statement}
 
-  \textbf{Пример.} Пусть \textit{n = 1729} – число Кармайкла, разложим \textit{n - 1 = 2\textsuperscript{ 6} 3\textsuperscript{ 3}}. 
-Выполним тест Миллера–Рабина для \textit{a = 2}:
+      Тест Миллера-Рабина определяет, что \textit{n} {$\in$} \textit{N} – простое с вероятностью
+    \textit{1 - 4\textsuperscript{ -k}} менее, чем за \textit{8 k N} арифметических операций, где \textit{N = {$\log_{2}{n}$} +1 }
+    
+  \end{statement}
+
+  \begin{example}    
   
-  \begin{enumerate}
-   \item x\textsubscript{0} = 2\textsuperscript{ 27} (mod 1729) = 625 {$\ne$} 1, {$\ne$} n - 1
-   \item x\textsubscript{1} = x\textsubscript{0}\textsuperscript{2} (mod 1729) = 645\textsuperscript{ 2} (mod 1729) = 1065
-   \item x\textsubscript{2} = x\textsubscript{1}\textsuperscript{2} (mod 1729) = 1065\textsuperscript{ 2} (mod 1729) = 1
-  \end{enumerate}
+      Пусть \textit{n = 1729} – число Кармайкла, разложим \textit{n - 1 = 2\textsuperscript{ 6} 3\textsuperscript{ 3}}. 
+    Выполним тест Миллера–Рабина для \textit{a = 2}:
+    
+    \begin{enumerate}
+    \item x\textsubscript{0} = 2\textsuperscript{ 27} (mod 1729) = 625 {$\ne$} 1, {$\ne$} n - 1
+    \item x\textsubscript{1} = x\textsubscript{0}\textsuperscript{2} (mod 1729) = 645\textsuperscript{ 2} (mod 1729) = 1065
+    \item x\textsubscript{2} = x\textsubscript{1}\textsuperscript{2} (mod 1729) = 1065\textsuperscript{ 2} (mod 1729) = 1
+    \end{enumerate}
+    
+    Последующие элементы \textit{{x\textsubscript{i}}} для \textit{i = 3, 4, 5} равны 1, и последовательность 
+  \textit{{x\textsubscript{1}, x\textsubscript{2}, {$\dots$}, x\textsubscript{s-1}}}, 
+  не содержит \textit{n - 1}. Значит, 2 является свидетелем непростоты \textit{n}, и \textit{n = 1729} – составное число
   
-  Последующие элементы \textit{{x\textsubscript{i}}} для \textit{i = 3, 4, 5} равны 1, и последовательность 
-\textit{{x\textsubscript{1}, x\textsubscript{2}, {$\dots$}, x\textsubscript{s-1}}}, 
-не содержит \textit{n - 1}. Значит, 2 является свидетелем непростоты \textit{n}, и \textit{n = 1729} – составное число
+  \end{example}
 
 \subsection{Построение больших простых чисел}
+
+\paragraph{} Большие простые числа можно строить сравнительно быстро. При этом можно обеспечить их случайное распределение в 
+заданном диапазоне величин. Иначе система шифрования RSA теряла бы всякий практический смысл. Наиболее эффективным средством 
+построения простых чисел является модифицированная малая теорема Ферма. Рассмотрим ее, а так же полезное следствие из этой теоремы.
+
+  \begin{theorem}
+  
+      Пусть \textit{N, S} - нечётные натуральные числа, \textit{N - 1 = S R}, причем для каждого простого делителя \textit{q}  
+  числа \textit{S} существует целое число \textit{a} такое, что
+
+    \begin{equation}
+      \textit{a\textsuperscript{ N - 1} {$\equiv$} (mod N), (a\textsuperscript{ {$\frac{N - 1}{q}$}} - 1, N) = 1}
+    \end{equation}
+
+  Тогда каждый простой делитель \textit{p} числа \textit{N} удовлетворяет сравнению
+
+    \begin{equation}
+      \textit{p {$\equiv$} 1(mod 2S)}
+    \end{equation}  
+  
+  \end{theorem}
+  
+  \begin{cons} 
+    Если выполнены условия теоремы (2.1.1) и \textit{R {$\le$} 4S + 2}, то \textit{N} - простое число. Действительно, пусть \textit{N}  
+  равняется произведению не менее двух простых чисел. Каждое из них, согласно утверждению теоремы (2.1.1), не меньше, чем \textit{2S + 1}. Но тогда 
+
+    \begin{equation}
+      \textit{(2S + 1)\textsuperscript{ 2} {$ \le $} N = S R + 1 {$ \le $} 4S\textsuperscript{ 2} + 2S + 1.}
+    \end{equation}
+
+    Противоречие и доказывает следствие.
+  \end{cons}
+  
+  \paragraph{} Полезно показать как, имея большое простое число \textit{S}, можно построить существенно большее простое число \textit{N}. 
+  
+    \begin{enumerate}
+     \item Выберем для этого случайным образом чётное число \textit{R} на промежутке \textit{S {$\le$} R {$\le$} 4S + 2} и положим \textit{N = S R + 1} 
+     \item Затем проверим число \textit{N} на отсутствие малых простых делителей, разделив его на малые простые числа
+     \item Испытаем \textit{N} некоторое количество раз с помощью алгоритм, проверяющего число на простоту, на пример тест Миллера-Рабина 
+     \item Если при этом выяснится, что \textit{N} - составное число, то переходим к шагу 1 
+    \end{enumerate}
+
+Если число \textit{N} выдержало все тесты на простоту, то появляется надежда на то, что \textit{N} - простое число, и следует попытаться 
+доказать простоту с помощью модифицированной малой теоремы Ферма. Для этого можно случайным образом выбирать число \textit{a, 1 < a < N},
+и проверять для него выполнимость соотношений
+
+  \begin{equation}
+    \textit{a\textsuperscript{ N - 1} {$\equiv$} (mod N), (a\textsuperscript{ R} - 1, N) = 1}.
+  \end{equation}
+  
+  Если при выбранном \textit{a} эти соотношения выполняются, то, согласно следствию из модифицированной малой теоремы Ферма, можно 
+утверждать, что число \textit{N} простое. Если же эти условия нарушаются, нужно выбрать другое значение \textit{a} и повторять 
+эти операции до тех пор, пока такое число не будет обнаружено.
+
+  Предположим, что построенное число \textit{N} действительно является простым. Зададимся вопросом, сколь долго придётся 
+перебирать числа \textit{a}, пока не будет найдено такое, для которого будут выполнены условия (2.1.7). Заметим, что для простого числа \textit{N}
+первое условие (2.1.7), согласно малой теореме Ферма, будет выполняться всегда. Те же числа \textit{a}, для которых нарушается второе 
+условие (2.1.7), удовлетворяют сравнению
+
+  \begin{equation}
+   \textit{a\textsuperscript{ R} {$\equiv$} 1(mod N)}.
+  \end{equation}
+
+Как известно, уравнение \textit{x\textsuperscript{ R} = 1} в поле вычетов \textit{F\textsubscript{N}} имеет не более \textit{R} решений. 
+Одно из них \textit{x = 1}. Поэтому на промежутке \textit{1 < a < N} имеется не более \textit{R - 1} чисел, для которых не выполняются 
+условия (2.1.7). Это означает, что, выбирая случайным образом числа \textit{a} на промежутке \textit{1 < a < N}, при простом \textit{N}
+можно с вероятностью большей, чем \textit{1 - O(S\textsuperscript{ -1})}, найти число \textit{a}, для которого будут выполнены условия 
+теоремы (2.1.1), и тем доказать, что \textit{N} действительно является простым числом.
+
+  Заметим, что построенное таким способом простое число \textit{N} будет удовлетворять неравенству \textit{N > S\textsuperscript{ 2}}, 
+т. е. будет записываться вдвое большим количеством цифр, чем исходное простое число \textit{S}. Заменив теперь число \textit{S} на 
+найденное простое число \textit{N} и повторив с этим новым \textit{S} все указанные выше действия, можно построить еще большее простое 
+число.
 
 \subsection{Практические рекомендации}
 
