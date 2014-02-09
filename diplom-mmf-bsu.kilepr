@@ -38,7 +38,7 @@ Indentation Mode=normal
 Mode=LaTeX
 
 [document-settings,item:PrimeNumbers/DiplomProject-BigNumbers.tex]
-Bookmarks=224,233,284
+Bookmarks=18,279,11,288,339
 Encoding=UTF-8
 Highlighting=LaTeX
 Indentation Mode=normal
@@ -52,7 +52,7 @@ Indentation Mode=normal
 Mode=LaTeX
 
 [document-settings,item:PrimeNumbers/DipomProject-FactorizationProblem.tex]
-Bookmarks=97,114
+Bookmarks=172,97,114
 Encoding=UTF-8
 Highlighting=LaTeX
 Indentation Mode=normal
@@ -84,43 +84,43 @@ order=-1
 
 [item:DiplomProject-Title.tex]
 archive=true
-column=0
+column=30
 encoding=UTF-8
 highlight=LaTeX
-line=0
+line=17
 mode=LaTeX
 open=false
 order=0
 
 [item:DiplomProject.tex]
 archive=true
-column=5
+column=17
 encoding=UTF-8
 highlight=LaTeX
-line=34
+line=0
 mode=LaTeX
 open=true
 order=0
 
 [item:Introduction/DiplomProject-Introduction.tex]
 archive=true
-column=2
+column=13
 encoding=UTF-8
 highlight=LaTeX
-line=75
+line=81
 mode=LaTeX
-open=false
+open=true
 order=2
 
 [item:PrimeNumbers/DiplomProject-BigNumbers.tex]
 archive=true
-column=127
+column=16
 encoding=UTF-8
 highlight=LaTeX
-line=11
+line=260
 mode=LaTeX
 open=true
-order=2
+order=1
 
 [item:PrimeNumbers/DiplomProject-PrimeNumbers.tex]
 archive=true
@@ -129,18 +129,18 @@ encoding=UTF-8
 highlight=LaTeX
 line=3
 mode=LaTeX
-open=false
-order=-1
+open=true
+order=3
 
 [item:PrimeNumbers/DipomProject-FactorizationProblem.tex]
 archive=true
-column=74
+column=0
 encoding=UTF-8
 highlight=LaTeX
-line=114
+line=172
 mode=LaTeX
 open=true
-order=1
+order=5
 
 [item:RSA/DiplomProject-RSA.tex]
 archive=true
@@ -174,23 +174,23 @@ order=-1
 
 [item:RSA/DiplomProject-RSACryptanalysis.tex]
 archive=true
-column=33
+column=116
 encoding=UTF-8
 highlight=LaTeX
-line=29
+line=4
 mode=LaTeX
 open=true
-order=4
+order=6
 
 [item:RSA/DiplomProject-RSAFundamentals.tex]
 archive=true
-column=88
+column=12
 encoding=UTF-8
 highlight=LaTeX
-line=31
+line=87
 mode=LaTeX
 open=true
-order=3
+order=4
 
 [item:RSA/DiplomProject-RSAGeneralization.tex]
 archive=true
@@ -213,28 +213,28 @@ open=false
 order=-1
 
 [view-settings,view=0,item:DiplomProject-Title.tex]
-CursorColumn=0
-CursorLine=0
+CursorColumn=30
+CursorLine=17
 JumpList=
-ViMarks=
+ViMarks=.,17,29,[,17,29,],17,29
 
 [view-settings,view=0,item:DiplomProject.tex]
-CursorColumn=5
-CursorLine=34
+CursorColumn=17
+CursorLine=0
 JumpList=
-ViMarks=.,34,4,[,34,4,],34,4
+ViMarks=.,0,16,[,0,16,],0,16
 
 [view-settings,view=0,item:Introduction/DiplomProject-Introduction.tex]
-CursorColumn=2
-CursorLine=75
+CursorColumn=13
+CursorLine=81
 JumpList=
-ViMarks=.,75,0,[,75,0,],75,1
+ViMarks=.,81,0,[,81,0,],81,12
 
 [view-settings,view=0,item:PrimeNumbers/DiplomProject-BigNumbers.tex]
-CursorColumn=127
-CursorLine=11
+CursorColumn=16
+CursorLine=260
 JumpList=
-ViMarks=.,11,126,[,11,125,],11,126,a,224,0,b,233,0,c,284,0
+ViMarks=.,260,15,[,260,15,],260,15,a,279,0,b,288,0,c,339,0,d,11,0,e,18,0
 
 [view-settings,view=0,item:PrimeNumbers/DiplomProject-PrimeNumbers.tex]
 CursorColumn=0
@@ -243,19 +243,19 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:PrimeNumbers/DipomProject-FactorizationProblem.tex]
-CursorColumn=74
-CursorLine=114
+CursorColumn=0
+CursorLine=172
 JumpList=
-ViMarks=.,114,73,[,114,73,],114,73,a,97,0,b,114,0
+ViMarks=.,172,0,[,172,0,],172,0,a,97,0,b,114,0,c,172,0
 
 [view-settings,view=0,item:RSA/DiplomProject-RSACryptanalysis.tex]
-CursorColumn=33
-CursorLine=29
+CursorColumn=116
+CursorLine=4
 JumpList=
-ViMarks=.,29,32,[,29,32,],29,32
+ViMarks=.,4,115,[,4,115,],4,115
 
 [view-settings,view=0,item:RSA/DiplomProject-RSAFundamentals.tex]
-CursorColumn=88
-CursorLine=31
+CursorColumn=12
+CursorLine=87
 JumpList=
-ViMarks=.,31,87,[,31,87,],31,87
+ViMarks=.,87,11,[,87,5,],87,11
