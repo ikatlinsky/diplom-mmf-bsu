@@ -90,7 +90,132 @@
 
 \subsection{LLL-алгоритм}
 
-\paragraph{}
+  \begin{definition}
+    Пусть векторы \textit{{$ b_1, b_2, \dots, d_n \in R^n$}} линейно независимы, \textit{n < m}. Множество 
+      \begin{equation}
+	\textit{{$L=L(b_1, b_2, \dots, b_n) = Zb_1 + Zb_2 + \dots + Zb_n$}}
+      \end{equation}    
+    всех целочисленных комбинаций векторов \textit{{$ b_1, b_2, \dots, d_n$}} называется решеткой размерности \textit{n}. Множество
+    \textit{{$ \{b_1, b_2, \dots, b_n \} $}} называется базисом решетки \textit{L}.
+  \end{definition}
+  
+  \begin{theorem}
+    Пусть {$[b_1, b_2, \dots, b_n]$} - матрица, столбцам которой являются линейно независимые векторы {$ b_1, b_2, \dots, d_n \in R^n$}, {$n \le m$}.
+    Векторы \textit{{$ d_1, d_2, \dots, dn \in R^n$}} образуют базис решетки {$L(b_1, b_2, \dots, b_n)$} тогда и только тогда, когда существует такая матрица
+    {$M$} размера {$n \times n$} с целыми элементами, {$detM = \pm 1$}, что
+    
+      \begin{equation}
+       \textit{{$[d_1, d_2, \dots, d_n]^T = M [b_1, b_2, \dots, b_n]^T$}}
+      \end{equation}
+
+      \begin{proof}
+	Доказательство приведено в \cite[Глава 8.2, страница 260]{mah06}
+      \end{proof}
+  \end{theorem}  
+
+  \begin{definition}
+   Определителем решетки {$L(b_1,b_2, \dots, b_n) \in R^n$} называется число
+   
+   \begin{equation}
+    \textit{{$d(L) = \sqrt{detB}, B\textsubscript{ij} = (b_i, b_j)$}}.
+   \end{equation}
+   Из равенства для скалярного произведения векторов {$(u, v) = u^T E v$}, где \textit{E} - единичная матрица, получаем 
+   \textit{{$d(L) = \sqrt{det(B^TEB)} = \sqrt{det(B^TB)}$}}, где {$B = [b_1,b_2, \dots, b_n]$}.
+  \end{definition}
+  
+  \begin{theorem}
+   Определитель решетки не зависит от выбора базиса, то есть является инвариантом решетки.
+   
+   \begin{proof}
+    Доказательство приведено в \cite[Глава 8.2, страница 261]{mah06}
+  \end{proof}
+  \end{theorem}  
+  
+  Пусть {$\{ b_1, b_2, \dots, b_n \}$} - базис решетки {$L \in R^m$}  пусть числа {$\mu\textsubscript{ij}$}, {$1 \le j < i \le n$}, и векторы
+  {$b_1^*, b_2^*, \dots, b_n^*$} получены в результате процесса ортогонализации Грама-Шмидта.
+  
+  \begin{definition}
+   Базис {$\{b_1, b_2, \dots, b_n\}$} называется \textit{LLL-приведенным (приведенным по Ловашу)}, если этот базис приведен по норме и
+   
+   \begin{equation}
+      \textit{{$\lVert b_i^* \lVert^2 \ge (\frac{3}{4} - \mu\textsubscript{{$i,i-1$}}^2)\lVert b\textsubscript{{$i-1$}}^* \lVert^2, 1<i \le m $}}
+   \end{equation}
+
+  \end{definition}
+  
+  \begin{lemma}
+   Если {$\{b_1, b_2, \dots, b_n\}$} - \textit{LLL-приведенный} базис решетки {$L \subset R^m$}, то для всех {$1 \le j < i \le n$} выполняется неравенство
+   
+   \begin{equation}
+    \textit{{$ \lVert b_j^* \lVert^2 \le 2\textsuperscript{{$i-j$}} \lVert b_i^* \lVert^2 $}}
+   \end{equation}
+   \begin{proof}
+      Доказательство приведено в \cite[Глава 8.2, страница 265]{mah06}
+   \end{proof}   
+  \end{lemma}
+  
+  \begin{theorem}
+   Для \textit{LLL-приведенного} базиса {$\{ b_1, b_2, \dots, b_n \}$} решетки {$L \subset R^m$} справедливы следующие утверждения
+   
+   \begin{enumerate}
+    \item \textit{{$ \lVert b_i^* \lVert^2 \le 2\textsuperscript{{$j-1$}} \lVert b_j^* \lVert^2, 1 \le i < j \le n  $}}
+    \item \textit{{$ d(L) \le \prod_{i=0}^{n}{ \lVert b_i \lVert } \le 2\textsuperscript{{$\frac{n(n-1)}{4}$}} d(L) $}}
+    \item \textit{{$ \lVert b_i \lVert^2 \le 2\textsuperscript{{$\frac{n-1}{4}$}} \sqrt[n]{d(L)} $}}
+   \end{enumerate}
+
+   \begin{proof}
+      Доказательство приведено в \cite[Глава 8.2, страница 266]{mah06}
+   \end{proof}
+
+  \end{theorem}
+  
+  \subsubsection{Алгоритм Ленстры-Ленстры-Ловаша}
+    Вход: Базис {$\{ b_1,b_2, \dots, b_n \}$} решетки в {$R^m$}, {$m \ge n$}
+    Выход: \textit{LLL-приведенный} базис решетки
+  
+    \begin{enumerate}
+     \item Выполнить процесс ортогонализации Грама-Шмидта для векторов {$b_1, b_2, \dots, b_n$} 
+     \item Положить {$k=2$}
+     \item При {$ |\mu\textsubscript{{$k,k-1$}}| > \frac{1}{2}$} выполнить следующие действия
+     
+      \begin{enumerate}
+       \item При {$ \mu\textsubscript{{$k,k-1$}} > 0 $} вычислить {$r=[\frac{1}{2} + \mu\textsubscript{{$k,k-1$}}]$}, иначе {$r=-[\frac{1}{2} - \mu\textsubscript{{$k,k-1$}}]$}
+       \item Положить {$b_k = b_k - r b\textsubscript{{$k-1$}}$}
+       \item Для {$j=1,2,\dots,k-2$} вычислить {$ \mu\textsubscript{{$k,j$}}=\mu\textsubscript{{$k,j$}} - r \mu\textsubscript{{$k-1,j$}} $}
+       \item Положить {$ \mu\textsubscript{{$k,k-1$}}=\mu\textsubscript{{$k,k-1$}} - r $}
+      \end{enumerate}
+     
+     \item При {$ B_k < (\frac{3}{4} - \mu^2\textsubscript{{$k,k-1$}})B\textsubscript{{$k-1$}} $} выполнить
+     
+      \begin{enumerate}
+       \item Положить {$\mu = \mu\textsubscript{{$k,k-1$}}$}, {$B=B_k + \mu^2 B\textsubscript{{$k-1$}}$}, {$\mu\textsubscript{{$k,k-1$}}=\frac{\mu B\textsubscript{{$k-1$}}}{B}$},
+	{$B_k = \frac{B\textsubscript{{$k-1$}} B_k}{B}$}, {$B\textsubscript{{$k-1$}} = B_k$}
+       \item Поменять местами векторы {$b_k$} и {$b\textsubscript{{$k-1$}}$}
+       \item При {$k > 2$} поменять местами коэффициенты {$\mu\textsubscript{{$k,j$}}$} и {$\mu\textsubscript{{$k-1,j$}}$} для {$j=1,2,\dots,k-2$}
+       \item Для {$s=k+1,k+2,\dots,n$} положить {$t=\mu\textsubscript{{$s,k$}}$}, {$\mu\textsubscript{{$s,k$}}=\mu\textsubscript{{$s,k-1$}}-\mu t$},
+	{$\mu\textsubscript{{$s,k-1$}}=t + \mu\textsubscript{{$k,k-1$}} \mu\textsubscript{{$s,k$}}$}
+       \item Положить {$k = max(2,k-1)$} и вернуться на шаг 3
+      \end{enumerate}
+     
+     \item При {$ B_k \ge (\frac{3}{4} - \mu^2\textsubscript{{$k,k-1$}})B\textsubscript{{$k-1$}} $} выполнить
+     
+      \begin{enumerate}
+       \item Для {$l=k-2,k-3,\dots,1$} при {$\mu\textsubscript{{$k,j$}}$} выполнить
+       
+	\begin{enumerate}
+	  \item При {$ \mu\textsubscript{{$k,l$}} > 0 $} вычислить {$r=[\frac{1}{2} + \mu\textsubscript{{$k,l$}}]$}, иначе {$r=-[\frac{1}{2} - \mu\textsubscript{{$k,l$}}]$}
+	  \item Положить {$b_k=b_k - r b_l$}   
+	  \item Для {$j = 1, 2, \dots, l - 1$} положить {$\mu\textsubscript{{$k,j$}} = \mu\textsubscript{{$k,j$}} - r \mu\textsubscript{{$l,j$}}$}
+	  \item Положить {$\mu\textsubscript{{$k,j$}} = \mu\textsubscript{{$k,l$}} - r$}
+	\end{enumerate}
+       
+       \item  Положить {$k=k+1$}   
+      \end{enumerate}
+     
+     \item Если {$k \le n$}, то вернуться на шаг 3
+     \item Результат: {$\{ b_1,b_2, \dots, b_n \}$}
+    \end{enumerate}
+
 
 \subsection{Теорема Копперсмита}
 
