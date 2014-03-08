@@ -38,7 +38,7 @@ Indentation Mode=normal
 Mode=LaTeX
 
 [document-settings,item:PrimeNumbers/DiplomProject-BigNumbers.tex]
-Bookmarks=18,279,11,288,339
+Bookmarks=289,298,349,270,219
 Encoding=UTF-8
 Highlighting=LaTeX
 Indentation Mode=normal
@@ -94,10 +94,10 @@ order=0
 
 [item:DiplomProject.tex]
 archive=true
-column=17
+column=44
 encoding=UTF-8
 highlight=LaTeX
-line=0
+line=47
 mode=LaTeX
 open=true
 order=0
@@ -109,15 +109,15 @@ encoding=UTF-8
 highlight=LaTeX
 line=81
 mode=LaTeX
-open=true
+open=false
 order=2
 
 [item:PrimeNumbers/DiplomProject-BigNumbers.tex]
 archive=true
-column=16
+column=25
 encoding=UTF-8
 highlight=LaTeX
-line=260
+line=100
 mode=LaTeX
 open=true
 order=1
@@ -129,7 +129,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=3
 mode=LaTeX
-open=true
+open=false
 order=3
 
 [item:PrimeNumbers/DipomProject-FactorizationProblem.tex]
@@ -139,7 +139,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=172
 mode=LaTeX
-open=true
+open=false
 order=5
 
 [item:RSA/DiplomProject-RSA.tex]
@@ -179,7 +179,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=4
 mode=LaTeX
-open=true
+open=false
 order=6
 
 [item:RSA/DiplomProject-RSAFundamentals.tex]
@@ -189,7 +189,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=87
 mode=LaTeX
-open=true
+open=false
 order=4
 
 [item:RSA/DiplomProject-RSAGeneralization.tex]
@@ -219,10 +219,10 @@ JumpList=
 ViMarks=.,17,29,[,17,29,],17,29
 
 [view-settings,view=0,item:DiplomProject.tex]
-CursorColumn=17
-CursorLine=0
+CursorColumn=44
+CursorLine=47
 JumpList=
-ViMarks=.,0,16,[,0,16,],0,16
+ViMarks=.,47,44,[,47,44,],47,44
 
 [view-settings,view=0,item:Introduction/DiplomProject-Introduction.tex]
 CursorColumn=13
@@ -231,10 +231,10 @@ JumpList=
 ViMarks=.,81,0,[,81,0,],81,12
 
 [view-settings,view=0,item:PrimeNumbers/DiplomProject-BigNumbers.tex]
-CursorColumn=16
-CursorLine=260
+CursorColumn=25
+CursorLine=100
 JumpList=
-ViMarks=.,260,15,[,260,15,],260,15,a,279,0,b,288,0,c,339,0,d,11,0,e,18,0
+ViMarks=.,259,0,[,259,0,],259,0,a,289,0,b,298,0,c,349,0,d,219,0,f,270,0
 
 [view-settings,view=0,item:PrimeNumbers/DiplomProject-PrimeNumbers.tex]
 CursorColumn=0
