@@ -138,7 +138,7 @@
    Базис {$\{b_1, b_2, \dots, b_n\}$} называется \textit{LLL-приведенным (приведенным по Ловашу)}, если этот базис приведен по норме и
    
    \begin{equation}
-      \textit{{$\lVert b_i^* \lVert^2 \ge (\frac{3}{4} - \mu\textsubscript{{$i,i-1$}}^2)\lVert b\textsubscript{{$i-1$}}^* \lVert^2, 1<i \le m $}}
+      \textit{{$\lVert b_i^* \lVert^2 \ge (\frac{3}{4} - \mu\textsubscript{{$i,i-1$}}^2)\lVert b^*\textsubscript{{$i-1$}} \lVert^2, 1<i \le m $}}
    \end{equation}
 
   \end{definition}
@@ -219,4 +219,89 @@
 
 \subsection{Теорема Копперсмита}
 
-\paragraph{}
+  \begin{theorem}
+   Пусть \textit{N} - целое число, факторизация которого неизвестна и которое имеет делитель {$b \ge N^\beta, 0 < \beta \le 1$}. Пусть {$f(x)$} - одномерный унитарный
+   многочлен степени {$\delta$} и {$c \ge 1$}, тогда можно найти все решения {$x_0$} уравнения
+   
+    \begin{equation}
+     \textit{{$ f(x) \equiv 0(mod b), |x_0| \le c N\textsuperscript{{$\frac{\beta^2}{\delta}$}} $}}
+    \end{equation}
+
+    за время {$O(c \delta^5 log^9 N)$}
+    
+    \begin{proof}
+     Доказательство приведено в \cite[Глава 8.2, страницы 320-350]{may10}
+    \end{proof}
+
+  \end{theorem}
+  
+  Далее будет представлен алгоритм, на входе которого  
+    \begin{itemize}
+     \item Целое число {$N$}, факторизация которого не известна
+     \item Одномерный инвариантный полином {$f(x)$} степени {$\delta$}
+     \item Ограничение {$\beta \in (0,1]$} такое, что {$b \ge N^\beta$} для некотрого делителя {$b$}числа {$N$}
+    \end{itemize}
+  на выходе
+    \begin{itemize}
+     \item {$f(x_0) \equiv 0 (mod b)$}
+     \item {$|x_0| \le N\textsuperscript{{$\frac{\beta^2}{\delta}$}}$}
+    \end{itemize}
+    
+  Теорема Ховергрэва-Грэхема дает 2 критерия, по которым можно найти полиномы {$g(x)$}, которые эквивалентны нуля при малых значениях целых корней
+
+  \begin{theorem}
+   Пусть {$g(x)$} унитарный полином, состоящий из {$n$} мономов, {$m$} - положительное целое число. Тогда если
+   
+    \begin{enumerate}
+     \item {$g(x_0) = 0(mod b^m), |x_0| \le X$}
+     \item {$ \lVert g(x X) \lVert < \frac{b^m}{\sqrt{n}} $}
+    \end{enumerate}
+    
+    то, {$g(x_0) = 0$} выполняется для целых чисел.
+    
+    \begin{proof}
+      Доказательство приведено в \cite[Глава 8.2, страницы 321-322]{may10}
+    \end{proof}
+
+  \end{theorem}
+
+  \begin{theorem}[Копперсмита]
+    Пусть {$N$} - целое число, факторизация которого не известна и делитель {$b \ge N^\beta, 0 < \beta \le 1$}. Пусть {$0 < \epsilon \le \frac{1}{7}\beta$}.
+    Кроме того, пусть {$f(x)$} - унитарный одномерный полином степени {$\delta$}. Тогда мы можем найти все решения {$x_0$} уравнения
+    
+      \begin{equation}
+       \textit{{$ f(x) = 0 (mod b), |x_0| \le \frac{1}{2} N\textsuperscript{{$\frac{\beta^2}{\delta} - \epsilon$}} $}}.
+      \end{equation}
+
+    Скорость работы алгоритма составляет {$O(\epsilon\textsuperscript{-7} \delta^5 log^2 N)$}
+    
+    \begin{proof}
+      Доказательство приведено в \cite[Глава 8.2, страницы 323-326]{may10}
+    \end{proof}
+
+  \end{theorem}
+
+  \subsubsection{Алгоритм Копперсмита для одномерного случая}
+    Вход: полином {$f(x)$} степени {$\delta$}, число {$N$} и его делитель {$b$}, {$b \ge N\beta$}, {$\epsilon \le \frac{1}{7} \beta$}
+    Выход: множество {$R$}, где {$x_0 \in R$} для {$f(x_0) = 0 (mod b), |x_0| \le X$}
+    
+    \begin{enumerate}
+      \item Вычислить {$m = \lceil \frac{\beta^2}{\delta \epsilon} \rceil$} и {$t = \lfloor \delta m (\frac{1}{\beta} - 1) \rfloor$}
+      \item Вычислить полиномы
+	\begin{equation}
+	  \textit{{$ g\textsubscript{{$i,j$}}(x) = x^j N^i f\textsuperscript{{$m-i$}}(x), i=0, \dots, m-1, j=0, \dots, \delta-1 $}}
+	\end{equation}
+	
+	\begin{equation}
+	  \textit{{$ h_i(x) = x^i f^m(x), i = 0, \dots, t-1 $}}
+	\end{equation}
+	
+      \item Вычислить ограничение {$X = \frac{1}{2} \lceil N\textsuperscript{{$\frac{\beta^2}{\delta} - \epsilon$}} \rceil$}. Построить базис {$B$} решетки,
+	где векторы базиса являются коэффициентами {$g\textsubscript{{$i,j$}}(x X)$} и {$h_i(x X)$}
+      \item Применить \textit{LLL-алгоритм} к базису {$B$} решетки. Пусть {$\nu$} - вектор кратчайшей длинны в \textit{LLL-приведенном} базисе. Вектор {$\nu$}
+	является коэффициент-вектором полинома {$g(xX)$}. Построить полином {$g(x)$}.
+      \item Найти множество {$R$} решений {$g(x)$} над целыми числами. Для каждого корня {$x_0 \in R$} проверить условие НОД{$(N, f(x_0)) \ge N^\beta$}, 
+	если условие не выполняется, то необходимо исключить {$x_0$} из {$R$}
+    \end{enumerate}
+
+    
