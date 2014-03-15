@@ -4,7 +4,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif
 kileprversion=2
 kileversion=2.1.3
-lastDocument=RSA/DiplomProject-RSAAttacks.tex
+lastDocument=PrimeNumbers/DipomProject-FactorizationProblem.tex
 masterDocument=
 name=diplom-mmf-bsu
 pkg_extIsRegExp=false
@@ -125,7 +125,7 @@ archive=true
 column=21
 encoding=UTF-8
 highlight=LaTeX
-line=20
+line=9
 mode=LaTeX
 open=true
 order=0
@@ -162,10 +162,10 @@ order=3
 
 [item:PrimeNumbers/DipomProject-FactorizationProblem.tex]
 archive=true
-column=2
+column=37
 encoding=UTF-8
 highlight=LaTeX
-line=104
+line=271
 mode=LaTeX
 open=true
 order=2
@@ -192,23 +192,23 @@ order=2
 
 [item:RSA/DiplomProject-RSAAttacks.tex]
 archive=true
-column=47
+column=82
 encoding=UTF-8
 highlight=LaTeX
-line=5
+line=235
 mode=LaTeX
 open=true
 order=3
 
 [item:RSA/DiplomProject-RSACryptanalysis.tex]
 archive=true
-column=79
+column=19
 encoding=UTF-8
 highlight=LaTeX
-line=172
+line=304
 mode=LaTeX
-open=false
-order=0
+open=true
+order=4
 
 [item:RSA/DiplomProject-RSAFundamentals.tex]
 archive=true
@@ -254,9 +254,9 @@ ViMarks=.,17,29,[,17,29,],17,29
 
 [view-settings,view=0,item:DiplomProject.tex]
 CursorColumn=21
-CursorLine=20
+CursorLine=9
 JumpList=
-ViMarks=.,11,38,[,11,2,],11,38
+ViMarks=.,9,21,[,9,21,],9,21
 
 [view-settings,view=0,item:Introduction/DiplomProject-Introduction.tex]
 CursorColumn=13
@@ -277,10 +277,10 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:PrimeNumbers/DipomProject-FactorizationProblem.tex]
-CursorColumn=2
-CursorLine=104
+CursorColumn=37
+CursorLine=271
 JumpList=
-ViMarks=.,172,0,[,172,0,],172,0,a,97,0,b,114,0,c,172,0
+ViMarks=.,271,35,[,271,34,],271,36,a,97,0,b,114,0,c,172,0
 
 [view-settings,view=0,item:RSA/DiplomProject-RSA.tex]
 CursorColumn=0
@@ -295,16 +295,16 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:RSA/DiplomProject-RSAAttacks.tex]
-CursorColumn=47
-CursorLine=5
+CursorColumn=82
+CursorLine=235
 JumpList=
-ViMarks=.,23,58,[,23,58,],23,58
+ViMarks=.,235,82,[,235,82,],235,82
 
 [view-settings,view=0,item:RSA/DiplomProject-RSACryptanalysis.tex]
-CursorColumn=79
-CursorLine=172
+CursorColumn=19
+CursorLine=304
 JumpList=
-ViMarks=.,172,78,[,172,76,],172,78
+ViMarks=.,304,19,[,304,19,],304,19
 
 [view-settings,view=0,item:RSA/DiplomProject-RSAFundamentals.tex]
 CursorColumn=12
