@@ -1,4 +1,4 @@
-\documentclass[12pt]{extreport}
+\documentclass[14pt]{extreport}
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
@@ -8,6 +8,8 @@
 \usepackage{titlesec}
 \usepackage{verbatim}
 \usepackage{booktabs}
+\usepackage{listings,xcolor}
+\lstloadlanguages{[5.2]Mathematica}
 \graphicspath{{images/}}
 
 % Форматирование нумерации библиографии
@@ -16,9 +18,9 @@
 %\makeatother
 
 \usepackage{geometry}
-\geometry{left=2cm}
-\geometry{right=2cm}
-\geometry{top=1.5cm}
+\geometry{left=3cm}
+\geometry{right=1cm}
+\geometry{top=2cm}
 \geometry{bottom=2cm}
 
 \renewcommand{\theenumi}{\arabic{enumi}.}
@@ -27,7 +29,23 @@
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
 \renewcommand{\theenumiii}{.\arabic{enumiii}}
 \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}
-\renewcommand{\baselinestretch}{1.25}
+
+\renewcommand{\baselinestretch}{1.2}
+
+\renewcommand{\lstlistingname}{Листинг}
+\lstset{language=Mathematica}
+\lstset{basicstyle={\sffamily\footnotesize},
+  numbers=left,
+  numberstyle=\color{black},
+  numbersep=2pt,
+  breaklines=true,
+  captionpos={t},
+  frame={lines},
+  rulecolor=\color{black},
+  framerule=3pt,
+  columns=flexible,
+  tabsize=2
+}
 
 \newcommand*\rfrac[2]{{}^{#1}\!/_{#2}}
 
@@ -65,4 +83,5 @@
 \input{./PrimeNumbers/DiplomProject-PrimeNumbers}
 \input{./RSA/DiplomProject-RSA}
 \input{./Conclusion/DiplomProject-Conclusion}
+\input{./Appendix/Appendix}
 \end{document}

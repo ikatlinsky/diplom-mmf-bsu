@@ -1,0 +1,81 @@
+\section{Тесты чисел на простоту}
+
+\subsection{Тест Миллера-Рабина}
+
+  Дано: {$n$} - исследуемое число, {$k$} - свидель простоты \\
+  Возвращает: {$True$} - если {$k$} простое, иначе - {$False$}
+
+\begin{lstlisting}[language=Mathematica,caption={Тест Миллера-Рабина}]
+  MillerRabinWitnessQ[n_, k_] := Module[{d = n - 1, s = 0, test = True, x, a, r},
+    While[Mod[d, 2] == 0, d /= 2; s++];
+    
+    x = PowerMod[k, d, n];
+    If[x != 1,
+    For[r = 0, r < s, r++,
+      If[x == n - 1, Continue[]];
+      x = Mod[x x, n];
+      ];
+    If[x != n - 1, test = False];
+    ];
+
+    Return[test]
+  ]
+\end{lstlisting}
+
+\subsection{Вероятностный тест Миллера-Рабина}
+
+  Дано: {$n$} - исследуемое число, {$m$} - число тестов \\
+  Возвращает: {$True$} - если простое, иначе - {$False$}
+
+\begin{lstlisting}[language=Mathematica,caption={Вероятностный тест Миллера-Рабина}]
+  ProbabilityMillerRabinWitnessQ[n_, m_] := Module[{a, i, tmp = {}},
+    a = Table[RandomInteger[{2, n - 1}], {i, 1, m}];
+    For[i = 1, i <= Length@a, i++,
+      tmp = Append[tmp, If[MillerRabinWitnessQ[n, a[[i]]] == True, 1, 0]];
+    ];
+    If[tmp == Table[1, {Length@a}], True, False]
+  ] 
+\end{lstlisting}
+
+\subsection{Улучшенный тест Миллера-Рабина}
+
+  Дано: {$n$} - исследуемое число, нечетное, {$r$} - число тестов \\
+  Возвращает: {$True$} - если простое, иначе - {$False$}
+
+\begin{lstlisting}[language=Mathematica,caption={
+  Улучшенный тест Миллера-Рабина  
+}]
+  MillerRabinTest[n_, r_] := Module[{i, primeQ = True, a, x0, d = n - 1, s = 0, X},
+    If[EvenQ@n, Return@False];
+    While[Mod[d, 2] == 0, d /= 2; s++];
+    For[i = 1, i <= r, i++,
+      a = RandomInteger[{2, n - 2}];
+      x0 = PowerMod[a, d, n];
+      If[x0 == 1 || x0 == n - 1, Continue[]];
+      X = NestList[PowerMod[#, 2, n] &, x0, s - 1];
+      If[MemberQ[X, n - 1], Continue[], primeQ = False; Break[]];
+    ];
+    
+    Return@primeQ
+  ] 
+\end{lstlisting}
+
+\subsection{Малая модифицированная теорема Ферма}
+
+  Пусть {$N$}, {$P$} - нечётные натуральные числа, {$N-1 = PR$} \\
+  Дано: {$p$} - {$P$}, {$r$} - R, {$steps$} - количество проверок \\
+  Возвращает: {$True$} - если простое, иначе - {$False$}
+
+\begin{lstlisting}[language=Mathematica,caption={
+  Малая модифицированная теорема Ферма  
+}]
+  SmallModifiedFermat[p_, r_, steps_: 100] := Module[{complex = True, a, step = 0},
+    While[complex && step <= steps,
+      a = RandomInteger[{1, p}];
+      If[PowerMod[a, p - 1, p] == 1 && GCD[a^r - 1, p] == 1, complex = False];
+      step = step + 1;
+    ];
+    
+    Return@! complex
+  ] 
+\end{lstlisting}
