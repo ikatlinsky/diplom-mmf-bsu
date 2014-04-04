@@ -8,18 +8,18 @@
     \begin{lstlisting}[language=Mathematica,caption={
       Генерация больших простых чисел
     }]
-      GoodRSAPrimeQ[n_Integer, l_Integer] := PrimeQ[n] && Module[{d = 1, m = (n - 1)/2},
-	While[d <= l && ! PrimeQ[m/d], d++];
-	Return[ d <= l]
-      ]
+    GoodRSAPrimeQ[n_Integer, l_Integer] := PrimeQ[n] && Module[{d = 1, m = (n - 1)/2},
+	     While[d <= l && ! PrimeQ[m/d], d++];
+	     Return[ d <= l]
+	  ]
 
-      RSAPrime[digits_Integer] := Module[{l, cand},
-	cand = RandomInteger[{10^(digits - 1), 10^digits - 1}];
-	l = 10^Floor[1/30 Log[10.`, cand]];
-	If[EvenQ[cand], cand++];
-	While[! GoodRSAPrimeQ[cand, l], cand += 2];
-	
-	Return@cand
+    RSAPrime[digits_Integer] := Module[{l, cand},
+        cand = RandomInteger[{10^(digits - 1), 10^digits - 1}];
+        l = 10^Floor[1/30 Log[10.`, cand]];
+        If[EvenQ[cand], cand++];
+        While[! GoodRSAPrimeQ[cand, l], cand += 2];
+        
+        Return@cand
       ]
 
     \end{lstlisting}
@@ -32,13 +32,13 @@
     \begin{lstlisting}[language=Mathematica,caption={
       Генерация с использованием теста Миллера-Рабина  
     }]
-      MillerRabinPrimeGeneration[num_Integer, m_] := Module[{n = RandomInteger[{1, num}]},
-	While[ProbabilityMillerRabinWitnessQ[n, m] != True, 
-	  n = RandomInteger[{1, num}]
-	];
+  MillerRabinPrimeGeneration[num_Integer, m_] := Module[{n = RandomInteger[{1, num}]},
+      While[ProbabilityMillerRabinWitnessQ[n, m] != True, 
+         n = RandomInteger[{1, num}]
+      ];
       
-	Return[n]
-      ]
+      Return[n]
+  ]
     \end{lstlisting}
 
   \section{Генерация с использованием малой модифицированной теоремы Ферма}
