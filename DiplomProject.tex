@@ -15,10 +15,6 @@
 \lstloadlanguages{[5.2]Mathematica}
 \graphicspath{{images/}}
 
-% Форматирование нумерации библиографии
-%\makeatletter
-%\renewcommand{\@biblabel}[1]{#1.}
-%\makeatother
 \makeatletter
   \def\thebibliography#1{\chapter*{Список использованных источников\@mkboth
     {REFERENCES}{REFERENCES}}\list
@@ -30,17 +26,6 @@
       \sfcode`\.=1000\relax}
   \makeatother
   
-% \makeatletter
-% \def\redeflchapter{\def\l@chapter{\@dottedtocline{1}{3.0em}{7.8em}}}
-% \renewcommand\appendix{\par
-% \setcounter{chapter}{0}%
-% \setcounter{section}{0}%
-% \def\@chapapp{\appendixname}%
-% \addtocontents{toc}{\protect\redeflchapter}
-% \def\thechapter{\appendixname\hspace{0.2cm}\@Alph\c@chapter}}
-% \makeatother
-% \renewcommand{\appendixname}{Приложение}
-
 \usepackage{geometry}
 \geometry{left=3cm}
 \geometry{right=1cm}

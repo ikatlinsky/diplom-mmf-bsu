@@ -41,47 +41,6 @@
   ]
     \end{lstlisting}
 
-  \section{Генерация с использованием малой модифицированной теоремы Ферма}
-
-    \subsection{1 итерация поиска большего простого числа, чем заданное}
-
-      Вход: {$s$} - простое число \\
-      Выход: большее простое число
-
-      \begin{lstlisting}[language=Mathematica,caption={
-	Генерация с использованием малой модифицированной теоремы Ферма (1 итерация)
-      }]
-	BigPrimeFermat[s_] := Module[{r, p, prime = False, rabbinResults, step = 0, fermatResult, S = s},
-	  While[! prime,
-	    r = RandomInteger[{S, 4 S + 2}];
-	    If[OddQ@r, r = r + 1];
-	  
-	    p = S r + 1;
-	    rabbinResults = MillerRabinTest[p, 1000];
-	    If[rabbinResults, prime = True; Break[], step = step + 1; Continue[]];
-	    fermatResult = SmallModifiedFermat[p, r];
-	    If[fermatResult, prime = True; Break[], step = step + 1; Continue[]];
-	  ];
-	  
-	  Return@p;
-	]
-      \end{lstlisting}
-
-    \subsection{Много итераций для генерации числа нужной размерности}
-    
-      Вход: {$s$} - простое число, {$steps$} - число итераций для получения числа нужной размерности \\
-      Выход: большее простое число
-  
-      \begin{lstlisting}[language=Mathematica,caption={
-	Генерация с использованием малой модифицированной теоремы Ферма (много итераций)
-      }]
-	BigPrimeFermatComplex[s_, steps_: 5] := Module[{S = s},
-	  Do[S = BigPrimeFermat@S, {i, 1, steps}];
-  
-	  Return@S;
-	]
-      \end{lstlisting}
-
   \section{Теорема Диемитко}
 
     \subsection{1 итерация поиска большего простого числа, чем заданное}
