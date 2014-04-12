@@ -11,6 +11,13 @@
 \usepackage{listings,xcolor}
 \usepackage[titletoc,title]{appendix}
 \usepackage[titletoc]{appendix}
+\usepackage{enumitem}
+
+\newlength{\wideitemsep}
+\setlength{\wideitemsep}{\itemsep}
+\addtolength{\wideitemsep}{-0.5\baselineskip}
+\let\olditem\item
+\renewcommand{\item}{\setlength{\itemsep}{\wideitemsep}\olditem}
 
 \lstloadlanguages{[5.2]Mathematica}
 \graphicspath{{images/}}
