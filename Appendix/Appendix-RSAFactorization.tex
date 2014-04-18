@@ -1,3 +1,426 @@
 % !TEX root = ../DiplomProject.tex
 
-\chapter{Проблема факторизации}
+\chapter{Проблема факторизации и атаки на RSA}
+
+	\section{Атака Винера}
+		Дано: $n$ - число для разложения, $e$ - открытый ключ \\
+		Возвращает: список $\{p, q, d\}$
+
+		\begin{lstlisting}[language=Mathematica,caption={
+      		Атака Винера
+    	}]
+		WienerAttackViaFractions[n_, e_] := Module[{cf, t, a, fraction, p, q, sol},
+		  cf = ContinuedFraction[e/n];
+		  Do[
+		   fraction = FromContinuedFraction[cf[[;; i]]];
+		   t = Numerator[fraction];
+		   a = Denominator[fraction];
+		   sol = ( x /. Solve[a e - t (x - 1) (n/x - 1) == 1, x, Integers]);
+		   If[Length@sol != 2, Continue[], {p, q} = sol];
+		   If[p q == n && PrimeQ@p && PrimeQ@q, Break[]];, {i, Length@cf}];
+	  	  Return@{p, q, GenerateD[e, p, q]};
+  		]
+    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+	    	\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример 1
+	    	}]
+			Timing@WienerAttackViaFractions[160523347, 60728973]
+
+			0.015600, {12347, 13001, 37}}
+	    	\end{lstlisting}
+
+	    	\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример 2
+	    	}]
+			Timing@WienerAttackViaFractions[27962863, 25411171]
+
+			{0.015600, {5279, 5297, 11}}
+	    	\end{lstlisting}
+
+	\section{Циклическая атака}
+		Дано: $ctext$ - шифротекст, $n=p q$, $e$ \\
+		Возвращает: расшифрованный текст
+
+		\begin{lstlisting}[language=Mathematica,caption={
+      		Циклическая атака
+    	}]
+		CycleAttack[ctext_, n_, e_] := Module[{s = 1},
+		  Cycle[0] = ctext;
+		  Cycle[s] = PowerMod[ctext, e, n];
+		  While[Not[PowerMod[Cycle[s], e, n] == ctext],
+		   Cycle[s + 1] = PowerMod[Cycle[s], e, n];
+		   s++;
+		   ];
+		  
+		  Return@Cycle@s
+		]
+    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+	    	\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример 1
+	    	}]
+			n = 160523347;
+			e = 60728973;
+
+			text = RandomInteger[{1, n - 1}]
+			93798566
+
+			cText = PowerMod[text, e, n]
+			113694657
+
+			CycleAttack[cText, n, e] == text
+			True
+	    	\end{lstlisting}
+
+	    	\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример 2
+	    	}]
+			p = RSAPrime[4];
+			q = RSAPrime[4];
+			n = p q;
+			e = GenerateE[p, q];
+
+			text = RandomInteger[{1, n - 1}]
+			1132470
+
+			cText = PowerMod[text, e, n]
+			1021100
+
+			CycleAttack[cText, n, e] == text
+			True
+	    	\end{lstlisting}
+
+	\section{Метод Полларада - $\rho$-method}
+		Дано: $n$ - число для разложения \\
+		Возвращает: $d$ - один из простых делителей
+
+		\begin{lstlisting}[language=Mathematica,caption={
+      		Метод Полларада
+    	}]
+		f[x_, n_] := x^2 + RandomInteger[{1, n - 1}]
+
+		PollardMethod[n_] := Module[{F, x0, xk, k = 1, h = 0, j, d = 0, X = {}},
+		  x0 = RandomInteger[{1, n}];
+		  X = Append[X, x0];
+		  j = 2^h - 1;
+		  F = f[x, n];
+		  
+		  While[1 != 0,
+		   xk = Mod[F /. x -> X[[k]], n];
+		   X = Append[X, xk];
+		   If[k >= 2^(h + 1), h = h + 1; j = 2^h - 1];
+		   d = GCD[X[[k]] - X[[j]], n];
+		   If[d > 1 && d < n && PrimeQ@d, Return@d];
+		   k++;
+		   If[d == n, x0 = RandomInteger[{1, n/2}]; X = {}; X = Append[X, x0]; k = 1; 
+		    h = 0; d = 0; j = 2^h - 1;];
+		   ];
+		]
+    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+	    	\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример 1
+	    	}]
+			n = 79923374586285156147820038497546494825176412377564495897351070054076985013\
+			313637663550307709700492789018226106959662590786932816156783375519786976435854\
+			115343950135169694546580722585598589389999500342042863;
+			Timing@PollardMethod[n]
+
+			{0.062400, 870097}
+	    	\end{lstlisting}
+
+	    	\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример 2
+	    	}]
+			n = 15472314688629160549824038347729592188878797394212009860756130919909345048\
+			967607897347240581426351694150575171731619581285281538900389774463206600132001\
+			68479581018694947749263661147360435549764084083539163;
+			Timing@PollardMethod[n]
+
+			{0.046800, 147449}
+	    	\end{lstlisting}
+
+	\section{Простая факторизация $n = p q$ перебором от $\sqrt{n}$}
+		Дано: $n$ - число для разложения\\
+		Возвращает: $p$ и $q$ - простые числа, такие, что $p q = n$
+
+		\begin{lstlisting}[language=Mathematica,caption={
+      		Факторизация перебором
+    	}]
+		FactorizeN[n_] := Module[{m, p = 0, q = 0},
+		  m = Ceiling[Sqrt[n]];
+		  
+		  While[! IntegerQ@p && ! IntegerQ@q || (! PrimeQ@p || ! PrimeQ@q),
+		   p = m + Sqrt[m^2 - n]; q = m - Sqrt[m^2 - n];
+		   m = m + 1;
+		   ];
+		  
+		  Return@{p, q}
+		]
+    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+	    	\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример 1
+	    	}]
+			n = 47265019076011597685193175304985522650207085961726934228462251375091225262\
+			12266957594716651886621755080767771037012709;
+
+			Timing@FactorizeN@n
+			{0.015600, {68749559326596121597334834453828505042604836577225382964179, 
+			  68749559326596121597334834453828505042604836577225382964071}}
+	    	\end{lstlisting}
+
+	    	\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример 2
+	    	}]
+			n = 22870741742408450337287485413052509520283011248642788341962704070824058377\
+			0057923294875414527283576421320326539232887;
+
+			Timing@FactorizeN@n
+
+			{0., {15123075660198374586880678928435811818533207071096745723349, 
+			  15123075660198374586880678928435811818533207071096745723163}}
+	    	\end{lstlisting}
+
+	\section{Алгоритм Ферма}
+		Вход: $n$ - число для разложения \\
+		Выход: $p$, $q$, $n$ такие, что $n = p q$
+
+		\begin{lstlisting}[language=Mathematica,caption={
+      		Алгоритм Ферма	
+    	}]
+		FermaAlgorithm[n_] := Module[{sqn = Round@Sqrt@n, s, t, flag = True, i = 1},
+		   While[flag,
+		    s = sqn + i;
+		    t = Sqrt[s^2 - n];
+		    If[IntegerQ@t, flag = False, i = i + 1];
+		    ];
+		   
+		   Return@{s - t, s + t, n}
+		];
+    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+	    	\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример 1
+	    	}]
+			FermaAlgorithm[1406303]
+
+			{1117, 1259, 1406303}
+	    	\end{lstlisting}
+
+	\section{Обобщенный алгоритм Ферма}
+		Вход: $n $- число для разложения, $k$ - шаг проверки \\
+		Выход: $p$, $q$, $n$ такие, что $n = p q$
+
+		\begin{lstlisting}[language=Mathematica,caption={
+      		Обобщенный алгоритм Ферма	
+    	}]
+		GeneralizedFermatAlgorithm[n_, k_] := 
+		  Module[{sqn, s, t, flag = True, i = 1, p, q},
+		   sqn = Round@Sqrt[k n];
+		   While[flag,
+		    s = sqn + i;
+		    t = Sqrt[s^2 - k n];
+		    If[IntegerQ@t, flag = False, i = i + 1];
+		    ];
+		   
+		   p = GCD[s - t, n]; q = n/p;
+		   Return@{p, q, n}
+		];
+    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+	    	\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример 1
+	    	}]
+			n = 5338771;
+			GeneralizedFermatAlgorithm[n, 8]
+
+			{1597, 3343, 5338771}
+	    	\end{lstlisting}
+
+	\section{Алгоритм Диксона}
+
+		\subsection{Проверка на линейную зависимость}
+			Вход: $vect$ - вектора для проверки на линейную зависимость \\
+			Выход: $True$ - линейная зависимость есть, иначе $False$
+
+			\begin{lstlisting}[language=Mathematica,caption={
+	      		Проверка на линейную зависимость
+	    	}]
+			isLinearCombination[vect_] := Module[{a = Transpose[vect], var, eq, n},
+			  n = Length@First@a;
+			  var = Table[{Subscript[x, i]}, {i, 1, n}];
+			  eq = Flatten[
+			     Solve[Flatten@(a.var) == 0, Table[Subscript[x, i], {i, 1, n}]]][[All, 2]];
+			  
+			  Return[Length@Cases[eq, Except[_Integer]] != 0]
+			]
+	    	\end{lstlisting}
+
+		\subsection{Построение базы разложения}
+			Вход: $n$ - число для разложения, $m$ - размерность базы разложения \\
+			Выход: $S$ - база разложения
+
+			\begin{lstlisting}[language=Mathematica,caption={
+	      		Построение базы разложения
+	    	}]
+			generateJacobiBase[n_, m_] := Module[{i = 1, S = {-1}},
+			  While[Length@S - 1 < m,
+			   If[JacobiSymbol[n, Prime[i]] == 1, AppendTo[S, Prime[i]]];
+			   i = i + 1;
+			   ];
+			  
+			  Return@S
+			]
+	    	\end{lstlisting}
+
+		\subsection{Построение B-гладких чисел}
+			Вход: $n$ - число для разложения, $m$ - размерность базы разложения, $S$ - база разложения, $cf$ - представление корня из $n$ в виде
+			непрерывной дроби\\
+			Выход: $B$ - B-гладкие числа
+
+			\begin{lstlisting}[language=Mathematica,caption={
+	      		Построение B-гладких чисел
+	    	}]
+			findBSmoothNumerators[n_, m_, cf_, S_] := 
+			 Module[{a, b, e, B = {}, factor, k = 1},
+			  While[Length@B < m + 2,
+			   b = Numerator@FromContinuedFraction[cf[[1 ;; k]]];
+			   a = PowerMod[b, 2, n];
+			   factor = FactorInteger[a];
+			   If[! MemberQ[MemberQ[S, #] & /@ factor[[All, 1]], False],
+			    e = PrepareEVector[S, factor];
+			    AppendTo[B, {b, a, factor, e}],
+			    
+			    a = a - n; factor = FactorInteger[a];
+			    e = PrepareEVector[S, factor];
+			    If[! MemberQ[MemberQ[S, #] & /@ factor[[All, 1]], False], 
+			     AppendTo[B, {b, a, factor, e}]];
+			    ];
+			   k = k + 1;
+			   ];
+			  
+			  Return@B
+			]
+	    	\end{lstlisting}
+
+		\subsection{Алгоритм Диксона}
+			Вход: $n$ - число для разложения, $m$ - размерность базы разложения \\
+			Выход: $p$, $q$, $n$ такие, что $n = p q$
+
+			\begin{lstlisting}[language=Mathematica,caption={
+      			Алгоритм Диксона
+    		}]
+			DixonsAlgorithm[N_, m_] := 
+			 Module[{S, n = Floor@Sqrt@N, B = {}, b, a, factor, k = 1, cf, e, sbs, sol, 
+			   dim, notLinear = True, s, t, p, q},
+			  (*generation of factor base*)
+			  S = generateJacobiBase[N, m];
+			  (*continued fraction for sqrt of N*)
+			  cf = Flatten@ContinuedFraction@Sqrt@N;
+			  (*finding of B-smooth numerators of contined fraction*)
+			  B = findBSmoothNumerators[N, m, cf, S];
+			  (*find linearly dependent components*)
+			  sbs = Drop[Subsets[B[[All, 4]]], Length@B + 1];
+			  k = 1;
+			  While[notLinear && k <= Length@sbs,
+			   If[isLinearCombination[sbs[[k]]], notLinear = False, k = k + 1];
+			   ];
+			  sol = Flatten[Position[B[[All, 4]], #] & /@ sbs[[k]], 2];
+			  sol = B[[sol]];
+			  (*final result*)
+			  s = Mod[Times @@ sol[[All, 1]], N];
+			  t = Times @@ Flatten@((#[[1]]^(#[[2]]/2) & /@ #1) & /@ sol[[All, 3]]);
+			  
+			  Return@{p = GCD[s - t, N], N/p, N};
+			]
+	    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+    		\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример 1
+	    	}]
+			n = 21299881;
+			DixonsAlgorithm[n, 6]
+
+			{3851, 5531, 21299881}
+	    	\end{lstlisting}
+
+	\section{Алгоритм квадратичного решета}
+		Вход: $n$ - число для разложения, $k$ - размерность базы разложения, $m$ - число гладких пар \\
+		Выход: $p$, $q$, $n$ такие, что $n = p q$
+
+		\begin{lstlisting}[language=Mathematica,caption={
+      		Алгоритм квадратичного решета
+    	}]
+		QuadricPolynom[x_, r_, n_] := (x + r)^2 - n;
+
+		QuadricCieve[n_, k_, m_] := 
+		 Module[{S = {-1, 2}, i = 2, r = Floor@Sqrt[n], f, pairs = {}, a, b, factor, 
+		   bool, x, y, d = n, set, counter = 1, sq, Iset},
+		  (*factor base S*)
+		  While[Length@S - 2 < k,
+		   If[JacobiSymbol[n, Prime[i]] == 1, AppendTo[S, Prime[i]]];
+		   i = i + 1;
+		   ];
+		  (*pairs a and b, so b is smooth to S*)
+		  Do[
+		   a = r + i;
+		   b = QuadricPolynom[i, r, n];
+		   factor = FactorInteger[b][[All, 1]];
+		   If[! MemberQ[MemberQ[S, #] & /@ factor, False], AppendTo[pairs, {a, b}]];
+		   , {i, -m, m}];
+		  
+		  set = Drop[Subsets[pairs], 1];
+		  While[d >= n && counter <= Length@set,
+		   Iset = set[[counter]];
+		   sq = Times @@ Iset[[All, 2]];
+		   If[! Positive@sq || ! IntegerQ@Sqrt[sq], counter++; Continue[]];
+		   
+		   x = Times @@ Iset[[All, 1]]; y = Sqrt[sq];
+		   d = GCD[x - y, n];
+		   counter = counter + 1;
+		   ];
+		  
+		  Return@{d, n/d, n}
+		]
+    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+    		\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример 1
+	    	}]
+			n = 661643;
+			k = 10;
+			m = 105;
+
+			FactorInteger@n
+			QuadricCieve[n, k, m]
+
+			{{541, 1}, {1223, 1}}
+			{541, 1223, 661643}
+
+			FactorInteger@8931721
+			QuadricCieve[8931721, 12, 50]
+
+			{{2179, 1}, {4099, 1}}
+			{2179, 4099, 8931721}
+	    	\end{lstlisting}
+
+
+

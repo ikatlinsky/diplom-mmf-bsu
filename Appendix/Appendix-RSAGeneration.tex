@@ -1,3 +1,194 @@
 % !TEX root = ../DiplomProject.tex
 
 \chapter{Основные алгоритмы криптосистемы RSA}
+
+	\section{Генерация числа e}
+		Дано: $p$, $q$ - простые числа \\
+		Возвращает: часть открытого ключа - $e$
+
+		\begin{lstlisting}[language=Mathematica,caption={
+      		Генерация числа e	
+    	}]
+		GenerateE[p_Integer, q_Integer] := Module[{res, n = p q, phi = (p - 1) (q - 1)}, 
+			res = RandomInteger[{p, n}]; 
+			While[GCD[res, phi] != 1, res = RandomInteger[{p, n}]];
+
+			Return@res
+		]
+    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+    	\begin{lstlisting}[language=Mathematica,caption={
+      		Пример	
+    	}]
+		n = p q;
+
+		185540832948275930471097241734874660568239845230771926992813068239006\
+		462676943335830802004690371432925069083067363684541;
+
+		e = GenerateE[p, q];
+
+		1633870663516613776968275082626583079087602267653090223551409078842007\
+		2913861142884282761561489568870311006453494838051
+    	\end{lstlisting}
+
+	\section{Генерация числа d}
+		Дано: $p$, $q$ - простые числа \\
+		Возвращает: секретный ключ $d$
+
+		\begin{lstlisting}[language=Mathematica,caption={
+      		Генерация числа d	
+    	}]
+    	GenerateD[e_Integer, p_Integer, q_Integer] := PowerMod[e, -1, (p - 1) (q - 1)]
+    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+    	\begin{lstlisting}[language=Mathematica,caption={
+      		Пример	
+    	}]
+		d = GenerateD[e, p, q];
+
+		915894684214784522786002267653310889849081812083439831186947346958122837148235\
+		70501597775572223951191041670828593718731
+    	\end{lstlisting}
+
+	\section{Кодирование числа}
+		Дано: $num$ - число для кодирования, $e$ и $n$ - открытый ключ \\
+		Возвращает: шифр
+
+		\begin{lstlisting}[language=Mathematica,caption={
+      		Кодирование заданного числа	
+    	}]
+    	RSAEncodeNumber[num_Integer, e_Integer, n_Integer] := 
+    	PowerMod[num, e, n] /; num < n
+    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+    	\begin{lstlisting}[language=Mathematica,caption={
+      		Пример	
+    	}]
+		c = RSAEncodeNumber[123, e, n];
+
+		102058616806598002190131477898019759977592438305516544926415510748598280467606\
+		982364146907305716227019845783824533161550
+    	\end{lstlisting}
+
+	\section{Декодирование числа}
+		Дано: $num$ - число для расшифровки, $d$ - секретный ключ, $n$ - открытый ключ \\
+		Возвращает: расшифрованное число
+
+		\begin{lstlisting}[language=Mathematica,caption={
+      		Декодирование числа	
+    	}]
+		RSADecodeNumber[num_Integer, d_Integer, n_Integer] := PowerMod[num, d, n]
+    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+    	\begin{lstlisting}[language=Mathematica,caption={
+      		Пример	
+    	}]
+		RSADecodeNumber[c, d, n]
+
+		123
+    	\end{lstlisting}
+
+	\section{Алгоритм перевода строки в числовую последовательность}
+		Дано: $text$ - строка, переводимая в числа, $n$ - часть открытого ключа \\
+		Возвращает: последовательность чисел
+
+		\begin{lstlisting}[language=Mathematica,caption={
+      		Перевод строки в числовую последовательность
+    	}]
+		ConvertString[str_String] := Fold[Plus[256 #1, #2] &, 0, ToCharacterCode[str]];
+
+		StringToList[text_String, n_Integer] :=	
+			Module[{blockLength = Floor[N[Log[256, n]]], strLength = StringLength[text]},    
+       		ConvertString /@ Table[StringTake[text, 
+              {i, Min[strLength, i + blockLength - 1]}],
+           {i, 1, strLength, blockLength}]
+     	] /; n > 256
+    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+    	\begin{lstlisting}[language=Mathematica,caption={
+      		Пример	
+    	}]
+		codedText = StringToList["This is a message", n];
+
+		28722506059135649064412911394457431140197
+    	\end{lstlisting}
+
+	\section{Алгоритм перевода числовой последовательности в строку}
+		Дано: $l$ - последовательность, преобразуемая в строку \\
+		Возвращает: строка
+
+		\begin{lstlisting}[language=Mathematica,caption={
+      		Перевод числовой последовательности в строку
+    	}]
+		MakeList[0] = {};
+
+		MakeList[num_Integer] := Append[MakeList[Quotient[num, 256]], Mod[num, 256]]
+
+		ConvertNumber[num_Integer] := FromCharacterCode /@ MakeList[num]
+
+		ListToString[l_List] := StringJoin[ConvertNumber /@ l]
+    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+    	\begin{lstlisting}[language=Mathematica,caption={
+      		Пример	
+    	}]
+		ListToString[codedText]
+
+		"This is a message"
+    	\end{lstlisting}
+
+	\section{Алгоритм шифрования текста}
+		Дано: $text$ - строка для шифрования, $e$ и $n$ - открытые ключи \\
+		Возвращает: криптотекст
+
+		\begin{lstlisting}[language=Mathematica,caption={
+      		Алгоритм шифрования текста
+    	}]
+		RSAEncodeString[text_String, e_Integer, n_Integer] := 
+ 			RSAEncodeNumber[#, e, n] & /@ StringToList[text, n] /; n > 256
+    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+    	\begin{lstlisting}[language=Mathematica,caption={
+      		Пример	
+    	}]
+		c = RSAEncodeString["A secret message", e, n];
+
+		74899466982326048953779595360320106236869217435766292239410245927328265139809\
+		552597334992459785668849987607462481180285
+    	\end{lstlisting}
+
+	\section{Алгоритм декодирования текста}
+		Дано: $l$ - декодирование строки, $d$ - секретный ключ, $n$ - открытый ключ \\
+		Возвращает: расшифрованная строка
+
+		\begin{lstlisting}[language=Mathematica,caption={
+      		Алгоритм шифрования текста
+    	}]
+		RSADecodeString[l_List, d_Integer, n_Integer] := 
+ 			ListToString[RSADecodeNumber[#, d, n] & /@ l]
+    	\end{lstlisting}
+
+    	\subsection{Примеры}
+
+    	\begin{lstlisting}[language=Mathematica,caption={
+      		Пример	
+    	}]
+		RSADecodeString[c, d, n];
+
+		"A secret message"
+    	\end{lstlisting}
+
