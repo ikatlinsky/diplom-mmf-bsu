@@ -24,6 +24,17 @@
   ]
 \end{lstlisting}
 
+\subsection{Примеры}
+
+  \begin{lstlisting}[language=Mathematica,caption={Пример 1}]
+  p = 15485863;
+  MillerRabinWitnessQ[15485863, 10]
+  PrimeQ@p
+
+  True
+  True
+  \end{lstlisting}
+
 \section{Вероятностный тест Миллера-Рабина}
 
   Дано: {$n$} - исследуемое число, {$m$} - число тестов \\
@@ -38,3 +49,16 @@
     If[tmp == Table[1, {Length@a}], True, False]
   ] 
 \end{lstlisting}
+
+\subsection{Примеры}
+
+  \begin{lstlisting}[language=Mathematica,caption={Пример 1}]
+  p = 15485863;
+  Timing@ProbabilityMillerRabinWitnessQ[15485863, 100]
+  PrimeQ@p
+
+  {0.015625, True}
+  True 
+  \end{lstlisting}
+
+  

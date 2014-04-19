@@ -85,25 +85,25 @@
 
     	\subsection{Примеры}
 
-    	\begin{lstlisting}[language=Mathematica,caption={
-      		Пример	1
-    	}]
-		LLLAlgorithm[{{1, 0, 0, 5}, {0, 1, 0, 5}, {0, 0, 1, 5}}]
-		LatticeReduce[{{1, 0, 0, 5}, {0, 1, 0, 5}, {0, 0, 1, 5}}]
+	    	\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример	1
+	    	}]
+			LLLAlgorithm[{{1, 0, 0, 5}, {0, 1, 0, 5}, {0, 0, 1, 5}}]
+			LatticeReduce[{{1, 0, 0, 5}, {0, 1, 0, 5}, {0, 0, 1, 5}}]
 
-		{{-1, 1, 0, 0}, {-1, 0, 1, 0}, {1, 0, 0, 5}}
-		{{-1, 1, 0, 0}, {-1, 0, 1, 0}, {1, 0, 0, 5}}
-    	\end{lstlisting}
+			{{-1, 1, 0, 0}, {-1, 0, 1, 0}, {1, 0, 0, 5}}
+			{{-1, 1, 0, 0}, {-1, 0, 1, 0}, {1, 0, 0, 5}}
+	    	\end{lstlisting}
 
-    	\begin{lstlisting}[language=Mathematica,caption={
-      		Пример	2
-    	}]
-		LLLAlgorithm[{{1, 0, 0, 1345}, {0, 1, 0, 35}, {0, 0, 1, 154}}]
-		LatticeReduce[{{1, 0, 0, 1345}, {0, 1, 0, 35}, {0, 0, 1, 154}}]
+	    	\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример	2
+	    	}]
+			LLLAlgorithm[{{1, 0, 0, 1345}, {0, 1, 0, 35}, {0, 0, 1, 154}}]
+			LatticeReduce[{{1, 0, 0, 1345}, {0, 1, 0, 35}, {0, 0, 1, 154}}]
 
-		{{0, 9, -2, 7}, {1, 1, -9, -6}, {1, -3, -8, 8}}
-		{{0, 9, -2, 7}, {1, 1, -9, -6}, {1, -3, -8, 8}}
-    	\end{lstlisting}
+			{{0, 9, -2, 7}, {1, 1, -9, -6}, {1, -3, -8, 8}}
+			{{0, 9, -2, 7}, {1, 1, -9, -6}, {1, -3, -8, 8}}
+	    	\end{lstlisting}
 
 	\section{Алгоритм Копперсмита}
 		Вход: $f$ - полином, $NN=p q$ - составное число, $p$ и $q$ - простые \\
@@ -151,44 +151,230 @@
 
     	\subsection{Примеры}
 
-    	\begin{lstlisting}[language=Mathematica,caption={
-      		Пример	1
-    	}]
-		f[x_] := Expand@((x - 1) (x - 2) (x - 3) (x - 4) (x - 40))
-		NN = 12458;
-		Coppersmith[f, NN]
+	    	\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример	1
+	    	}]
+			f[x_] := Expand@((x - 1) (x - 2) (x - 3) (x - 4) (x - 40))
+			NN = 12458;
+			Coppersmith[f, NN]
 
-		{1, 2}
-    	\end{lstlisting}
+			{1, 2}
+	    	\end{lstlisting}
 
-    	\begin{lstlisting}[language=Mathematica,caption={
-      		Пример	2
-    	}]
-		p = RSAPrime[10]
-		q = RSAPrime[10]
-		n = p q
-		f2[x_] := Expand@((x - 1) (x - 2) (x - 3) (x - 4) (x - 40) (x - 40) (x - 156) (x - 998))
-		Coppersmith[f2, n]
+	    	\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример	2
+	    	}]
+			p = RSAPrime[10]
+			q = RSAPrime[10]
+			n = p q
+			f2[x_] := Expand@((x - 1) (x - 2) (x - 3) (x - 4) (x - 40) (x - 40) (x - 156) (x - 998))
+			Coppersmith[f2, n]
 
-		9292927559
-		7642228967
-		71018680179622401553
-		{1, 2, 3, 4}
-    	\end{lstlisting}
+			9292927559
+			7642228967
+			71018680179622401553
+			{1, 2, 3, 4}
+	    	\end{lstlisting}
 
-    	\begin{lstlisting}[language=Mathematica,caption={
-      		Пример	3
-    	}]
-		p = RSAPrime[50]
-		q = RSAPrime[50]
-		n = p q
-		f3[x_] := Expand@((x - 1) (x - 2) (x - 3) (x - 4) (x - 5) (x - 40) (x - 40) (x - 998) x)
-		Coppersmith[f3, n]
+	    	\begin{lstlisting}[language=Mathematica,caption={
+	      		Пример	3
+	    	}]
+			p = RSAPrime[50]
+			q = RSAPrime[50]
+			n = p q
+			f3[x_] := Expand@((x - 1) (x - 2) (x - 3) (x - 4) (x - 5) (x - 40) (x - 40) (x - 998) x)
+			Coppersmith[f3, n]
 
-		97782689110580772186708411304526221212574986151967
-		65956799531101932713749780654432033005384499563983
-		644943322327863993696069981091221157509595595720458070665516084380384623599211\
-		1377402958574477804561
-		{0, 0, 1, 2, 3, 4, 5, 40, 40, 998}
-    	\end{lstlisting}
+			97782689110580772186708411304526221212574986151967
+			65956799531101932713749780654432033005384499563983
+			644943322327863993696069981091221157509595595720458070665516084380384623599211\
+			1377402958574477804561
+			{0, 0, 1, 2, 3, 4, 5, 40, 40, 998}
+	    	\end{lstlisting}
+
+	\section{Упрощенная проблема RSA}
+		Вход: {$m^e, m', |m-m'| \le N^\frac{1}{e}$} \\   
+  		Выход: {$m \in Z_N$}  
+
+		\subsection{Начальные параметры}
+
+			\begin{lstlisting}[language=Mathematica,caption={
+	      		Начальные параметры
+	    	}]
+			p = RSAPrime[40]
+			q = RSAPrime[40]
+			n = p q
+			e = 7
+			m = 15896
+			c = PowerMod[M, e, n]
+
+			9622652790050554336371812544520812701891
+			9263560181542628546685268518468809256383
+			89140023226722394226112879285436419041513765944205436610065094651378340767920253
+			7
+			15896
+			256457248648114000263869628416
+	    	\end{lstlisting}
+
+    	\subsection{Полином аппроксимации}
+
+    		\begin{lstlisting}[language=Mathematica,caption={
+	      		Полином аппроксимации
+	    	}]
+			m' = 15800;
+
+			relaxedProblemPolynom[x_] := (m' + x)^e - c	
+	    	\end{lstlisting}
+
+    	\subsection{Решение}
+
+    		\begin{lstlisting}[language=Mathematica,caption={
+	      		Решение
+	    	}]
+			Coppersmith[relaxedProblemPolynom, n]
+			96
+
+			m = m' + 96 = 15896
+	    	\end{lstlisting}
+
+	\section{Атака Франклина-Райтера}
+  		Вход: {$c = m^e (mod \: N)$}, {$c^{'} = (m+r)^e (mod \: N)$}, {$|r| \le N^{1/e^{2}}$} \\
+  		Выход: $m$
+
+		\subsection{Функция зависимости сообщений и начальные параметры}
+
+			\begin{lstlisting}[language=Mathematica,caption={
+	      		Функция зависимости сообщений и начальные параметры
+	    	}]
+			FrankReiterPolynom[a_, b_, m_] := a m + b
+
+			p = RSAPrime[20]
+			34252875648544607507
+
+			q = RSAPrime[20]
+			89415793685815988603
+
+			n = p q
+			3062748062136175151514402826557820242721
+
+			e = 3;
+			d = GenerateD[e, p, q]
+			2041832041424116767593822771482306431075
+	    	\end{lstlisting}
+
+    	\subsection{$m1$ и $m2$ - сообщения для шифрования}
+
+    		\begin{lstlisting}[language=Mathematica,caption={
+	      		m1 и m2 - сообщения для шифрования
+	    	}]
+			a = 1;
+			b = 3;
+			m1 = 6;
+
+			m2 = FrankReiterPolynom[a, b, m1]
+			9
+	    	\end{lstlisting}
+
+    	\subsection{$c1$ и $c2$ - шифротексты}
+
+    		\begin{lstlisting}[language=Mathematica,caption={
+	      		Шифротексты
+	    	}]
+			c1 = RSAEncodeNumber[m1, e, n]
+			216
+
+			c2 = RSAEncodeNumber[m2, e, n]
+			729
+	    	\end{lstlisting}
+
+    	\subsection{Решение}
+
+    		\begin{lstlisting}[language=Mathematica,caption={
+	      		Решение
+	    	}]
+			FrankReitersAttack[c1_, c2_, n_, a_, b_] := Module[{f, g},
+			  f = Mod[b (c2 + 2 a^3 c1 - b^3), n];
+			  g = Mod[a (c2 - a^3 c1 + 2 b^3), n];
+			  
+			  Return@First@(x /. Solve[g x == f, x, Modulus -> n])
+			]
+
+			FrankReitersAttack[c1, c2, n, a, b]
+			6
+			m1 = 6
+			m2 == FrankReiterPolynom[a, b,m1]
+	    	\end{lstlisting}
+
+	\section{Факторизация при известной аппроксимации}
+		Вход: {$ N = p q, p': |p-p'| \le N^\frac{1}{4} $} \\   
+  		Выход: {$p$}  
+
+  		\subsection{Пример 1}
+
+	  		\subsubsection{Инициализация параметров}
+
+	  			\begin{lstlisting}[language=Mathematica,caption={
+		      		Инициализация параметров
+		    	}]
+				p = 25785228123955207329992023669947784861995718349736955586026199192716446882\
+				89101973195147518151530813;
+
+				q = 10668673279670479640047334548171542196218037195733888904249796125333457239\
+				565191307619576134523433776492344849818098672379446634699745951851743235009385\
+				642278100294010559055776215425912251443375612531;
+
+				X = 158823917060391733218296424878747562818233855499155999;
+
+				n = p q;
+
+				P = q - X + 1;
+		    	\end{lstlisting}
+
+	    	\subsubsection{Решение}
+
+	    		\begin{lstlisting}[language=Mathematica,caption={
+		      		Решение
+		    	}]
+				FactorizationPolynom[x_] := x + P
+
+				sol=Coppersmith[FactorizationPolynom, n];
+				{158823917060391733218296424878747562818233855499155998}
+
+				(First@sol + P) == q
+				True
+
+				(n/(First@sol + P) == p
+				True
+		    	\end{lstlisting}
+
+    	\subsection{Пример 2}
+
+	  		\subsubsection{Инициализация параметров}
+
+	  			\begin{lstlisting}[language=Mathematica,caption={
+		      		Инициализация параметров
+		    	}]
+				p = RSAPrime[150];
+				q = RSAPrime[200];
+				X = 4487454554185521545415451215421212154512121524541;
+				n = p q;
+				P = q - X + 1;
+		    	\end{lstlisting}
+
+	    	\subsubsection{Решение}
+
+	    		\begin{lstlisting}[language=Mathematica,caption={
+		      		Решение
+		    	}]
+				FactorizationPolynom[x_] := x + P
+
+				sol=Coppersmith[FactorizationPolynom, n]
+				{4487454554185521545415451215421212154512121524540}
+
+				(First@sol + P) == q
+				True
+
+				(n/(First@sol + P) == p
+				True
+		    	\end{lstlisting}
 

@@ -26,6 +26,24 @@
 
     \end{lstlisting}
 
+    \subsection{Примеры}
+
+      \begin{lstlisting}[language=Mathematica,caption={Пример 1}]
+      p = RSAPrime[60]
+      PrimeQ@p
+
+      196315822522241188643014752489528175135046890697463808010039
+      True
+      \end{lstlisting}
+
+      \begin{lstlisting}[language=Mathematica,caption={Пример 2}]
+      q = RSAPrime[60]
+      PrimeQ@q
+
+      945114003366975026340821154307727591775513848718061709474219
+      True
+      \end{lstlisting}
+
   \section{Генерация с использованием теста Миллера-Рабина}
 
     Дано: {$num$} - интервал для числа {$[1;num]$}, {$m$} - число тестов \\
@@ -34,14 +52,22 @@
     \begin{lstlisting}[language=Mathematica,caption={
       Генерация с использованием теста Миллера-Рабина  
     }]
-  MillerRabinPrimeGeneration[num_Integer, m_] := Module[{n = RandomInteger[{1, num}]},
-      While[ProbabilityMillerRabinWitnessQ[n, m] != True, 
-         n = RandomInteger[{1, num}]
-      ];
-      
-      Return[n]
-  ]
+    MillerRabinPrimeGeneration[num_Integer, m_] := Module[{n = RandomInteger[{1, num}]},
+        While[ProbabilityMillerRabinWitnessQ[n, m] != True, 
+           n = RandomInteger[{1, num}]
+        ];
+        
+        Return[n]
+    ]
     \end{lstlisting}
+
+    \subsection{Примеры}
+
+      \begin{lstlisting}[language=Mathematica,caption={Пример 1}]
+      Timing@MillerRabinPrimeGeneration[10^3, 100]
+
+      {0.109375, 367}
+      \end{lstlisting}
 
   \section{Теорема Диемитко}
 
@@ -51,21 +77,43 @@
       Выход: большее простое число
 
       \begin{lstlisting}[language=Mathematica,caption={
-	Теорема Диемитко (1 итерация)
+       Теорема Диемитко (1 итерация)
       }]
-	BigPrimeDiemitko[q_?PrimeQ] := 
-	Module[{n, t = 2 Length@IntegerDigits[q, 2], {$\xi$}, primeQ = False, u = 0, p},
-	  {$\xi$} = RandomReal[{0, 1}];
-	  n = Ceiling[2^(t - 1)/q] + Ceiling[2^(t - 1) {$\xi$}/q];
-	  If[OddQ@n, n = n + 1];
-	  While[! primeQ,
-	    p = (n + u) q + 1;
-	    If[1 == PowerMod[2, p - 1, p] && 1 != PowerMod[2, n + u, p], primeQ = True,
-	    u = u + 2];
-	  ];
-	
-	  Return@p
-	]
+    	BigPrimeDiemitko[q_?PrimeQ] := 
+    	Module[{n, t = 2 Length@IntegerDigits[q, 2], {$\xi$}, primeQ = False, u = 0, p},
+    	  {$\xi$} = RandomReal[{0, 1}];
+    	  n = Ceiling[2^(t - 1)/q] + Ceiling[2^(t - 1) {$\xi$}/q];
+    	  If[OddQ@n, n = n + 1];
+    	  While[! primeQ,
+    	    p = (n + u) q + 1;
+    	    If[1 == PowerMod[2, p - 1, p] && 1 != PowerMod[2, n + u, p], primeQ = True,
+    	    u = u + 2];
+    	  ];
+    	
+    	  Return@p
+    	]
+      \end{lstlisting}
+
+      \begin{lstlisting}[language=Mathematica,caption={Пример 1}]
+      p=Prime[1000000];
+      15485863
+
+      q=BigPrimeDiemitkoResults[p];
+      223847127598043
+
+      PrimeQ@q;
+      True
+      \end{lstlisting}
+
+      \begin{lstlisting}[language=Mathematica,caption={Пример 2}]
+      p=Prime[100000000];
+      2038074743
+
+      q=BigPrimeDiemitkoResults[p];
+      4561621090903322441
+
+      PrimeQ@q;
+      True
       \end{lstlisting}
 
     \subsection{Много итераций для генерации числа нужной размерности}
@@ -74,11 +122,51 @@
       Выход: большее простое число
 
       \begin{lstlisting}[language=Mathematica,caption={
-	  Теорема Диемитко (много итераций)
+	     Теорема Диемитко (много итераций)
       }]
-	BigPrimeDiemitkoComplex[s_, steps_: 5] := Module[{S = s},
-	  Do[S = BigPrimeDiemitko@S, {i, 1, steps}];
-  
-	  Return@S;
-	]
+    	BigPrimeDiemitkoComplex[s_, steps_: 5] := Module[{S = s},
+    	  Do[S = BigPrimeDiemitko@S, {i, 1, steps}];
+      
+    	  Return@S;
+    	]
+      \end{lstlisting}
+
+      \begin{lstlisting}[language=Mathematica,caption={Пример 1}]
+      p=Prime[1]];
+      2
+
+      q=BigPrimeDiemitkoComplexResults[p];
+      368232145871351076619854785594491593935433113140668319772418102971192962388774103259613
+
+      PrimeQ@q;
+      True
+      \end{lstlisting}
+
+      \begin{lstlisting}[language=Mathematica,caption={Пример 2}]
+      p=Prime[10]];
+      29
+
+      q=BigPrimeDiemitkoComplexResults[p];
+      638663772875710726503109287341875117266575187565363426263952126694444214855630831338080281\
+      9335793485340218738695099670054318954313764793371991947313963628189825525449\
+      6206580377499246334426253330060341007899760131
+
+      PrimeQ@q;
+      True
+      \end{lstlisting}
+
+      \begin{lstlisting}[language=Mathematica,caption={Пример 3}]
+      p=Prime[1000]];
+      7919
+
+      q=BigPrimeDiemitkoComplexResults[p];
+      77136673480644556865315768367268314816263106913594119648411208041116063926102788742047941420\
+      460510437041054943631262458452187699827924706534869956961247790320954339348028256271194127453\
+      196932602593923355735051477022365054953043123683148643201902587671779138858676653809127260758\
+      418112399765880889475436811240078372948957427572595574444624516405916208870454959690923772800\
+      240906984160048116854335409845660159937506451128215193370881307388134246284948149750620719092\
+      771493785478511669201945831056629079
+
+      PrimeQ@q;
+      True
       \end{lstlisting}
