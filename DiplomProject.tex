@@ -1,5 +1,5 @@
 \documentclass[14pt]{extreport}
-\usepackage[T2A]{fontenc}
+\usepackage[T2A,T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
 \usepackage{amssymb,amsfonts,amsmath,mathtext,cite,enumerate,float,amsthm} 
@@ -9,9 +9,10 @@
 \usepackage{verbatim}
 \usepackage{booktabs}
 \usepackage{listings,xcolor}
-\usepackage[titletoc,title]{appendix}
-\usepackage[titletoc]{appendix}
 \usepackage{enumitem}
+\usepackage[titletoc,title]{appendix}
+\usepackage[unicode]{hyperref}
+\usepackage{bookmark}
 
 % Basline size for distance between items in enumerate block
 \newlength{\wideitemsep}
@@ -51,9 +52,9 @@
 
 \renewcommand{\lstlistingname}{Листинг}
 \lstset{language=Mathematica}
-\lstset{basicstyle={\sffamily\footnotesize},
+\lstset{basicstyle={\sffamily},
   numbers=left,
-  numberstyle=\color{black},
+  numberstyle=\color{black},  
   numbersep=2pt,
   breaklines=true,
   captionpos={t},
