@@ -64,13 +64,13 @@
     \end{enumerate}  
     
   \begin{theorem}
-    Если $ed \equiv 1(mod \: \varphi(N))$, $(e, \varphi(N)) = 1$, $(m, N)=1$, тогда $(m^{e})^{d} (mod N) = m$
+    Если $ed \equiv 1(mod \: \varphi(N))$, $(e, \varphi(N)) = 1$, $(m, N)=1$, тогда $(m^{e})^{d} (mod \: N) = m$
 
     \begin{proof}
       Поскольку $ed \equiv 1(mod \: \varphi(N))$ , значит $ed = 1 + k \varphi(N)$, где $k$ - некоторое число. Из теоремы Эйлера следует,
       что 
         \begin{equation}
-          m^{\varphi(N)} \equiv 1(mod \: N), (m, n) = 1.
+          m^{\varphi(N)} \equiv 1(mod \: N), (m, N) = 1.
         \end{equation}
       Значит $(m^e)^d (mod \: N) = m^{1 + k \varphi(N)}(mod \: N) = m (m^{\varphi(N)})^k (mod \: N) = m$.
     \end{proof}

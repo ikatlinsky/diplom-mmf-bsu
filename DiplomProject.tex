@@ -3,7 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
 \usepackage{amssymb,amsfonts,amsmath,mathtext,cite,enumerate,float,amsthm} 
-\usepackage[dvips]{graphicx}
+\usepackage[pdftex]{graphicx}
 \usepackage{fixltx2e}
 \usepackage{titlesec}
 \usepackage{verbatim}
@@ -11,8 +11,8 @@
 \usepackage{listings,xcolor}
 \usepackage{enumitem}
 \usepackage[titletoc,title]{appendix}
-\usepackage[unicode]{hyperref}
-\usepackage{bookmark}
+% \usepackage[unicode]{hyperref}
+% \usepackage{bookmark}
 
 % Basline size for distance between items in enumerate block
 \newlength{\wideitemsep}
@@ -22,7 +22,7 @@
 \renewcommand{\item}{\setlength{\itemsep}{\wideitemsep}\olditem}
 
 \lstloadlanguages{[5.2]Mathematica}
-\graphicspath{{images/}}
+\graphicspath{{img/}}
 
 \makeatletter
   \def\thebibliography#1{\chapter*{Список использованных источников\@mkboth
