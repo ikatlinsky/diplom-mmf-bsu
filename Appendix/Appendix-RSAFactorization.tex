@@ -287,6 +287,26 @@
 			]
 	    	\end{lstlisting}
 
+    	\subsection{Разложение на множители методом $\rho$-Полларда}
+    		Вход: $n$ - число для разложения
+    		Выход: список всех простых делителей числа $n$
+
+    		\begin{lstlisting}[language=Mathematica,caption={
+	      		Разложение на множители
+	    	}]
+		factorizeByPollard[n_] := Module[{val = n, result = {}, p},
+			  While[! PrimeQ@val && val != 1,
+			   p = PollardMethod[val];
+			   val = val/p;
+			   AppendTo[result, p];
+			   ];
+			  
+			  If[val != 0, AppendTo[result, val]];
+			  If[Length@result == 0, AppendTo[result, n]];
+			  Return@result
+		]
+	    	\end{lstlisting}
+
 		\subsection{Построение B-гладких чисел}
 			Вход: $n$ - число для разложения, $m$ - размерность базы разложения, $S$ - база разложения, $cf$ - представление корня из $n$ в виде
 			непрерывной дроби\\
@@ -305,7 +325,7 @@
 			    e = PrepareEVector[S, factor];
 			    AppendTo[B, {b, a, factor, e}],
 			    
-			    a = a - n; factor = FactorInteger[a];
+			    a = a - n; factor = factorizeByPollard[a];
 			    e = PrepareEVector[S, factor];
 			    If[! MemberQ[MemberQ[S, #] & /@ factor[[All, 1]], False], 
 			     AppendTo[B, {b, a, factor, e}]];
@@ -361,44 +381,65 @@
 	    	\end{lstlisting}
 
 	\section{Алгоритм квадратичного решета}
-		Вход: $n$ - число для разложения, $k$ - размерность базы разложения, $m$ - число гладких пар \\
-		Выход: $p$, $q$, $n$ такие, что $n = p q$
+		\subsection{Разложение на множители методом $\rho$-Полларда}
+    		Вход: $n$ - число для разложения
+    		Выход: список всех простых делителей числа $n$
 
-		\begin{lstlisting}[language=Mathematica,caption={
-      		Алгоритм квадратичного решета
-    	}]
-		QuadricPolynom[x_, r_, n_] := (x + r)^2 - n;
-
-		QuadricCieve[n_, k_, m_] := 
-		 Module[{S = {-1, 2}, i = 2, r = Floor@Sqrt[n], f, pairs = {}, a, b, factor, 
-		   bool, x, y, d = n, set, counter = 1, sq, Iset},
-		  (*factor base S*)
-		  While[Length@S - 2 < k,
-		   If[JacobiSymbol[n, Prime[i]] == 1, AppendTo[S, Prime[i]]];
-		   i = i + 1;
-		   ];
-		  (*pairs a and b, so b is smooth to S*)
-		  Do[
-		   a = r + i;
-		   b = QuadricPolynom[i, r, n];
-		   factor = FactorInteger[b][[All, 1]];
-		   If[! MemberQ[MemberQ[S, #] & /@ factor, False], AppendTo[pairs, {a, b}]];
-		   , {i, -m, m}];
-		  
-		  set = Drop[Subsets[pairs], 1];
-		  While[d >= n && counter <= Length@set,
-		   Iset = set[[counter]];
-		   sq = Times @@ Iset[[All, 2]];
-		   If[! Positive@sq || ! IntegerQ@Sqrt[sq], counter++; Continue[]];
-		   
-		   x = Times @@ Iset[[All, 1]]; y = Sqrt[sq];
-		   d = GCD[x - y, n];
-		   counter = counter + 1;
+    		\begin{lstlisting}[language=Mathematica,caption={
+	      		Разложение на множители
+	    	}]
+		factorizeByPollard[n_] := Module[{val = n, result = {}, p},
+		  While[! PrimeQ@val && val != 1,
+		   p = PollardMethod[val];
+		   val = val/p;
+		   AppendTo[result, p];
 		   ];
 		  
-		  Return@{d, n/d, n}
+		  If[val != 0, AppendTo[result, val]];
+		  If[Length@result == 0, AppendTo[result, n]];
+		  Return@result
 		]
-    	\end{lstlisting}
+	    	\end{lstlisting}
+
+    	\subsection{Алгоритм квадратичного решета}
+			Вход: $n$ - число для разложения, $k$ - размерность базы разложения, $m$ - число гладких пар \\
+			Выход: $p$, $q$, $n$ такие, что $n = p q$
+
+			\begin{lstlisting}[language=Mathematica,caption={
+	      		Алгоритм квадратичного решета
+	    	}]
+			QuadricPolynom[x_, r_, n_] := (x + r)^2 - n;
+
+			QuadricCieve[n_, k_, m_] := 
+			 Module[{S = {-1, 2}, i = 2, r = Floor@Sqrt[n], f, pairs = {}, a, b, factor, 
+			   bool, x, y, d = n, set, counter = 1, sq, Iset},
+			  (*factor base S*)
+			  While[Length@S - 2 < k,
+			   If[JacobiSymbol[n, Prime[i]] == 1, AppendTo[S, Prime[i]]];
+			   i = i + 1;
+			   ];
+			  (*pairs a and b, so b is smooth to S*)
+			  Do[
+			   a = r + i;
+			   b = QuadricPolynom[i, r, n];
+			   factor = factorizeByPollard[b];
+			   If[! MemberQ[MemberQ[S, #] & /@ factor, False], AppendTo[pairs, {a, b}]];
+			   , {i, -m, m}];
+			  
+			  set = Drop[Subsets[pairs], 1];
+			  While[d >= n && counter <= Length@set,
+			   Iset = set[[counter]];
+			   sq = Times @@ Iset[[All, 2]];
+			   If[! Positive@sq || ! IntegerQ@Sqrt[sq], counter++; Continue[]];
+			   
+			   x = Times @@ Iset[[All, 1]]; y = Sqrt[sq];
+			   d = GCD[x - y, n];
+			   counter = counter + 1;
+			   ];
+			  
+			  Return@{d, n/d, n}
+			]
+	    	\end{lstlisting}
 
     	\subsection{Примеры}
 
