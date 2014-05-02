@@ -64,7 +64,7 @@
 
   \paragraph{} Если сообщение не велико, злоумышленник может попытаться подобрать открытый текст путем перебора всех возможных вариантов и 
   шифрования их на открытом ключе абонента $e$ до тех пор, пока не будет получен перехваченный шифротекст $c$. Такую атаку также возможно 
-  предотвратить при помощи добавок в сообщение
+  предотвратить при помощи добавок в сообщение.
 
 \subsubsection{Использование общих модулей}
 
@@ -81,7 +81,7 @@
   и $c_2$ - соответствующие им шифротексты. Заметим, что
   
     \begin{equation}
-      (m_1 m_2)^e = m_1^e m_2^e = c_1 c_2 (mod \: N)
+      (m_1 m_2)^e = m_1^e m_2^e = c_1 c_2 (mod \: N).
     \end{equation}
 
   Другими словами, шифротекст открытого текста $m = m_1 m_2$ есть \\ $c = c_1 c_2 (mod \: N)$. Это свойство, называемое также гомоморфным 
@@ -91,7 +91,7 @@
 \subsection{LLL-алгоритм}
 
   \begin{definition}
-    Пусть векторы $ b_1, b_2, \dots, d_n \in R^n$ линейно независимы, $n < m$. Множество 
+    Пусть векторы $ b_1, b_2, \dots, b_n \in R^m$ линейно независимы, $n < m$. Множество 
       \begin{equation}
 	       L=L(b_1, b_2, \dots, b_n) = Zb_1 + Zb_2 + \dots + Zb_n
       \end{equation}    
@@ -100,7 +100,7 @@
   \end{definition}
   
   \begin{theorem}
-    Пусть {$[b_1, b_2, \dots, b_n]$} - матрица, столбцам которой являются линейно независимые векторы {$ b_1, b_2, \dots, d_n \in R^n$}, {$n \le m$}.
+    Пусть {$[b_1, b_2, \dots, b_n]$} - матрица, столбцами которой являются линейно независимые векторы {$ b_1, b_2, \dots, d_n \in R^n$}, {$n \le m$}.
     Векторы $ d_1, d_2, \dots, dn \in R^n$ образуют базис решетки {$L(b_1, b_2, \dots, b_n)$} тогда и только тогда, когда существует такая матрица
     {$M$} размера {$n \times n$} с целыми элементами, {$detM = \pm 1$}, что
     
@@ -131,14 +131,18 @@
   \end{proof}
   \end{theorem}  
   
-  Пусть {$\{ b_1, b_2, \dots, b_n \}$} - базис решетки {$L \in R^m$}  пусть числа {$\mu\textsubscript{ij}$}, {$1 \le j < i \le n$}, и векторы
-  {$b_1^*, b_2^*, \dots, b_n^*$} получены в результате процесса ортогонализации Грама-Шмидта.
+  Пусть {$\{ b_1, b_2, \dots, b_n \}$} - базис решетки {$L \subset R^m$}  пусть числа {$\mu\textsubscript{ij}$}, {$1 \le j < i \le n$}, и векторы
+  {$\{b_1^*, b_2^*, \dots, b_n^*\}$} получены в результате процесса ортогонализации Грама-Шмидта.
   
   \begin{definition}
-   Базис {$\{b_1, b_2, \dots, b_n\}$} называется \textit{LLL-приведенным (приведенным по Ловашу)}, если этот базис приведен по норме и
+   Базис {$\{b_1, b_2, \dots, b_n\}$} называется \textit{LLL-приведенным (приведенным по Ловашу)}, если для соответствующего ортогонализованного базиса
+   {$\{b_1^*, b_2^*, \dots, b_n^*\}$} выполнены условия
+    \begin{equation}
+      \lVert \mu_{kl} \lVert \le \frac{1}{2}, 1 \le l < k \le n
+    \end{equation}
    
    \begin{equation}
-      \lVert b_i^* \lVert^2 \ge (\frac{3}{4} - \mu\textsubscript{{$i,i-1$}}^2)\lVert b^*\textsubscript{{$i-1$}} \lVert^2, 1<i \le m
+      \lVert b_i^* \lVert^2 \ge (\frac{3}{4} - \mu\textsubscript{{$i,i-1$}}^2)\lVert b^*\textsubscript{{$i-1$}} \lVert^2, 1<i \le m.
    \end{equation}
 
   \end{definition}
@@ -147,7 +151,7 @@
    Если {$\{b_1, b_2, \dots, b_n\}$} - \textit{LLL-приведенный} базис решетки {$L \subset R^m$}, то для всех {$1 \le j < i \le n$} выполняется неравенство
    
    \begin{equation}
-    \lVert b_j^* \lVert^2 \le 2\textsuperscript{{$i-j$}} \lVert b_i^* \lVert^2
+    \lVert b_j^* \lVert^2 \le 2\textsuperscript{{$i-j$}} \lVert b_i^* \lVert^2.
    \end{equation}
    \begin{proof}
       Доказательство приведено в \cite[Глава 8.2, страница 265]{mah06}
@@ -158,9 +162,9 @@
    Для \textit{LLL-приведенного} базиса {$\{ b_1, b_2, \dots, b_n \}$} решетки {$L \subset R^m$} справедливы следующие утверждения
    
    \begin{enumerate}
-    \item $ \lVert b_i^* \lVert^2 \le 2^{j-1} \lVert b_j^* \lVert^2, 1 \le i < j \le n  $
-    \item $ d(L) \le \prod_{i=0}^{n}{ \lVert b_i \lVert } \le 2^{\frac{n(n-1)}{4}} d(L) $
-    \item $ \lVert b_i \lVert^2 \le 2^{\frac{n-1}{4}} \sqrt[n]{d(L)} $
+    \item $ \lVert b_i^* \lVert^2 \le 2^{j-1} \lVert b_j^* \lVert^2, 1 \le i < j \le n  $.
+    \item $ d(L) \le \prod_{i=0}^{n}{ \lVert b_i \lVert } \le 2^{\frac{n(n-1)}{4}} d(L) $.
+    \item $ \lVert b_i \lVert^2 \le 2^{\frac{n-1}{4}} \sqrt[n]{d(L)} $.
    \end{enumerate}
 
    \begin{proof}
@@ -170,31 +174,31 @@
   \end{theorem}
   
   \subsubsection{Алгоритм Ленстры-Ленстры-Ловаша - \cite[Глава 8, страницы 256-273]{mah06}}
-    Вход: Базис {$\{ b_1,b_2, \dots, b_n \}$} решетки в {$R^m$}, {$m \ge n$} \\
-    Выход: \textit{LLL-приведенный} базис решетки
+    Вход: Базис {$\{ b_1,b_2, \dots, b_n \}$} решетки в {$R^m$}, {$m \ge n$}. \\
+    Выход: \textit{LLL-приведенный} базис решетки.
   
     \begin{enumerate}
-     \item Выполнить процесс ортогонализации Грама-Шмидта для векторов {$b_1, b_2, \dots, b_n$} 
-     \item Положить {$k=2$}
+     \item Выполнить процесс ортогонализации Грама-Шмидта для векторов  \\{$b_1, b_2, \dots, b_n$}. 
+     \item Положить {$k=2$}.
      \item При {$ |\mu\textsubscript{{$k,k-1$}}| > \frac{1}{2}$} выполнить следующие действия
      
       \begin{enumerate}
-       \item При {$ \mu\textsubscript{{$k,k-1$}} > 0 $} вычислить {$r=[\frac{1}{2} + \mu\textsubscript{{$k,k-1$}}]$}, иначе {$r=-[\frac{1}{2} - \mu\textsubscript{{$k,k-1$}}]$}
-       \item Положить {$b_k = b_k - r b\textsubscript{{$k-1$}}$}
-       \item Для {$j=1,2,\dots,k-2$} вычислить {$ \mu\textsubscript{{$k,j$}}=\mu\textsubscript{{$k,j$}} - r \mu\textsubscript{{$k-1,j$}} $}
-       \item Положить {$ \mu\textsubscript{{$k,k-1$}}=\mu\textsubscript{{$k,k-1$}} - r $}
+       \item При {$ \mu\textsubscript{{$k,k-1$}} > 0 $} вычислить {$r=[\frac{1}{2} + \mu\textsubscript{{$k,k-1$}}]$}, иначе {$r=-[\frac{1}{2} - \mu\textsubscript{{$k,k-1$}}]$}.
+       \item Положить {$b_k = b_k - r b\textsubscript{{$k-1$}}$}.
+       \item Для {$j=1,2,\dots,k-2$} вычислить {$ \mu\textsubscript{{$k,j$}}=\mu\textsubscript{{$k,j$}} - r \mu\textsubscript{{$k-1,j$}} $}.
+       \item Положить {$ \mu\textsubscript{{$k,k-1$}}=\mu\textsubscript{{$k,k-1$}} - r $}.
       \end{enumerate}
      
      \item При {$ B_k < (\frac{3}{4} - \mu^2\textsubscript{{$k,k-1$}})B\textsubscript{{$k-1$}} $} выполнить
      
       \begin{enumerate}
        \item Положить {$\mu = \mu\textsubscript{{$k,k-1$}}$}, {$B=B_k + \mu^2 B\textsubscript{{$k-1$}}$}, {$\mu\textsubscript{{$k,k-1$}}=\frac{\mu B\textsubscript{{$k-1$}}}{B}$},
-	{$B_k = \frac{B\textsubscript{{$k-1$}} B_k}{B}$}, {$B\textsubscript{{$k-1$}} = B_k$}
-       \item Поменять местами векторы {$b_k$} и {$b\textsubscript{{$k-1$}}$}
-       \item При {$k > 2$} поменять местами коэффициенты {$\mu\textsubscript{{$k,j$}}$} и {$\mu\textsubscript{{$k-1,j$}}$} для {$j=1,2,\dots,k-2$}
+	{$B_k = \frac{B\textsubscript{{$k-1$}} B_k}{B}$}, {$B\textsubscript{{$k-1$}} = B_k$}.
+       \item Поменять местами векторы {$b_k$} и {$b\textsubscript{{$k-1$}}$}.
+       \item При {$k > 2$} поменять местами коэффициенты {$\mu\textsubscript{{$k,j$}}$} и {$\mu\textsubscript{{$k-1,j$}}$} для {$j=1,2,\dots,k-2$}.
        \item Для {$s=k+1,k+2,\dots,n$} положить {$t=\mu\textsubscript{{$s,k$}}$}, {$\mu\textsubscript{{$s,k$}}=\mu\textsubscript{{$s,k-1$}}-\mu t$},
-	{$\mu\textsubscript{{$s,k-1$}}=t + \mu\textsubscript{{$k,k-1$}} \mu\textsubscript{{$s,k$}}$}
-       \item Положить {$k = max(2,k-1)$} и вернуться на шаг 3
+	{$\mu\textsubscript{{$s,k-1$}}=t + \mu\textsubscript{{$k,k-1$}} \mu\textsubscript{{$s,k$}}$}.
+       \item Положить {$k = max(2,k-1)$} и вернуться на шаг 3.
       \end{enumerate}
      
      \item При {$ B_k \ge (\frac{3}{4} - \mu^2\textsubscript{{$k,k-1$}})B\textsubscript{{$k-1$}} $} выполнить
@@ -203,31 +207,35 @@
        \item Для {$l=k-2,k-3,\dots,1$} при {$\mu\textsubscript{{$k,j$}}$} выполнить
        
 	\begin{enumerate}
-	  \item При {$ \mu\textsubscript{{$k,l$}} > 0 $} вычислить {$r=[\frac{1}{2} + \mu\textsubscript{{$k,l$}}]$}, иначе {$r=-[\frac{1}{2} - \mu\textsubscript{{$k,l$}}]$}
-	  \item Положить {$b_k=b_k - r b_l$}   
-	  \item Для {$j = 1, 2, \dots, l - 1$} положить {$\mu\textsubscript{{$k,j$}} = \mu\textsubscript{{$k,j$}} - r \mu\textsubscript{{$l,j$}}$}
-	  \item Положить {$\mu\textsubscript{{$k,j$}} = \mu\textsubscript{{$k,l$}} - r$}
+	  \item При {$ \mu\textsubscript{{$k,l$}} > 0 $} вычислить {$r=[\frac{1}{2} + \mu\textsubscript{{$k,l$}}]$}, иначе {$r=-[\frac{1}{2} - \mu\textsubscript{{$k,l$}}]$}.
+	  \item Положить {$b_k=b_k - r b_l$}   .
+	  \item Для {$j = 1, 2, \dots, l - 1$} положить {$\mu\textsubscript{{$k,j$}} = \mu\textsubscript{{$k,j$}} - r \mu\textsubscript{{$l,j$}}$}.
+	  \item Положить {$\mu\textsubscript{{$k,j$}} = \mu\textsubscript{{$k,l$}} - r$}.
 	\end{enumerate}
        
-       \item  Положить {$k=k+1$}   
+       \item  Положить {$k=k+1$}.   
       \end{enumerate}
      
-     \item Если {$k \le n$}, то вернуться на шаг 3
-     \item Результат: {$\{ b_1,b_2, \dots, b_n \}$}
+     \item Если {$k \le n$}, то вернуться на шаг 3.
+     \item Результат: {$\{ b_1,b_2, \dots, b_n \}$}.
     \end{enumerate}
 
 
 \subsection{Теорема Копперсмита}
 
+  \begin{definition}
+    Многочлен одной переменной называется унитарным или приведённым, если его старший коэффициент равен единице.
+  \end{definition}
+
   \begin{theorem}
    Пусть $N$ - целое число, факторизация которого неизвестна и которое имеет делитель {$b \ge N^\beta, 0 < \beta \le 1$}. Пусть {$f(x)$} - 
-   одномерный унитарный многочлен степени {$\delta$} и {$c \ge 1$}, тогда можно найти все решения {$x_0$} уравнения
+   унитарный многочлен от одной переменной степени {$\delta$} и {$c \ge 1$}, тогда можно найти все решения {$x_0$} уравнения
    
     \begin{equation}
-      f(x) \equiv 0(mod b), |x_0| \le c N^{\frac{\beta^2}{\delta}}
+      f(x) \equiv 0(mod \: b), |x_0| \le c N^{\frac{\beta^2}{\delta}}
     \end{equation}
 
-    за время {$O(c \delta^5 log^9 N)$}
+    за время {$O(c \delta^5 log^9 N)$}.
     
     \begin{proof}
      Доказательство приведено в \cite[страницы 320-350]{may10}
@@ -235,32 +243,30 @@
 
   \end{theorem}
   
-  Далее будет представлен алгоритм, на входе которого  
+  Далее будет представлен алгоритм, на входе которого дано
     \begin{itemize}
-     \item Целое число {$N$}, факторизация которого не известна
-     \item Одномерный инвариантный полином {$f(x)$} степени {$\delta$}
-     \item Ограничение {$\beta \in (0,1]$} такое, что {$b \ge N^\beta$} для некотрого делителя {$b$}числа {$N$}
+     \item Целое число {$N$}, факторизация которого не известна,
+     \item Унитарный полином от одной переменной {$f(x)$} степени {$\delta$},
+     \item Ограничение {$\beta \in (0,1]$} такое, что {$b \ge N^\beta$} для некотрого делителя {$b$} числа {$N$}.
     \end{itemize}
-  на выходе
-    \begin{itemize}
-     \item {$f(x_0) \equiv 0 (mod b)$}
-     \item {$|x_0| \le N^{\frac{\beta^2}{\delta}}$}
-    \end{itemize}
+
+    На выходе за полиномиальное время $\log{N}$ - все решения $x_0$ уравнения {$f(x_0) \equiv 0 (mod \: b)$}, удовлетворяющие условию
+    {$|x_0| \le N^{\frac{\beta^2}{\delta}}$}.  
     
-  Теорема Ховергрэва-Грэхема дает 2 критерия, по которым можно найти полиномы {$g(x)$}, которые эквивалентны нуля при малых значениях целых корней
+  Теорема Ховергрэва-Грэхема дает 2 критерия, по которым можно найти полиномы {$g(x)$} такие, что существуют решения $x_0$ уравнения $g(x_0)=0$
 
   \begin{theorem}
    Пусть {$g(x)$} унитарный полином, состоящий из {$n$} мономов, {$m$} - положительное целое число. Тогда если
    
     \begin{enumerate}
-     \item {$g(x_0) = 0(mod b^m), |x_0| \le X$}
-     \item {$ \lVert g(x X) \lVert < \frac{b^m}{\sqrt{n}} $}
+     \item {$g(x_0) = 0(mod \: b^m), |x_0| \le X$},
+     \item {$ \lVert g(x X) \lVert < \frac{b^m}{\sqrt{n}} $},
     \end{enumerate}
     
-    то, {$g(x_0) = 0$} выполняется для целых чисел.
+    то {$g(x_0) = 0$} выполняется для целых чисел $x_0$.
     
     \begin{proof}
-      Доказательство приведено в \cite[страницы 321-322]{may10}
+      Доказательство приведено в \cite[страницы 321-322]{may10}.
     \end{proof}
 
   \end{theorem}
@@ -273,33 +279,49 @@
         f(x) = 0 (mod b), |x_0| \le \frac{1}{2} N^{\frac{\beta^2}{\delta} - \epsilon}.
       \end{equation}
 
-    Скорость работы алгоритма составляет {$O(\epsilon^{-7} \delta^5 log^2 N)$}
+    Скорость работы алгоритма составляет {$O(\epsilon^{-7} \delta^5 log^2 N)$}.
     
     \begin{proof}
-      Доказательство приведено в \cite[страницы 323-326]{may10}
+      Доказательство приведено в \cite[страницы 323-326]{may10}.
     \end{proof}
 
   \end{theorem}
 
+    Кроме того, можно рассмотреть особый случай \textit{алгоритма Копперсмита} при котором $b=N$ и $c=1$.
+
+  \begin{theorem}
+    Пусть {$N$} - целое число, факторизация которого не известна, кроме того, пусть {$f(x)$} - унитарный одномерный полином степени {$\delta$}. Тогда 
+    мы можем найти все решения {$x_0$} уравнения
+
+      \begin{equation}
+        f(x) = 0 (mod b), |x_0| \le N^{\frac{1}{\delta}}.
+      \end{equation}
+
+    Скорость работы алгоритма составляет {$O(\delta^5 log^9 N)$}.
+    \begin{proof}
+      Доказательство приведено в \cite[страницы 326-327]{may10}.
+    \end{proof}
+  \end{theorem}
+
   \subsubsection{Алгоритм Копперсмита для одномерного случая - \cite[страницы 321-327]{may10}}
-    Вход: полином {$f(x)$} степени {$\delta$}, число {$N$} и его делитель {$b$}, {$b \ge N\beta$}, {$\epsilon \le \frac{1}{7} \beta$} \\
-    Выход: множество {$R$}, где {$x_0 \in R$} для {$f(x_0) = 0 (mod b), |x_0| \le X$}
+    Вход: полином {$f(x)$} степени {$\delta$}, число {$N$}. \\
+    Выход: множество {$R$} решений таких, что {$x_0 \in R$} для {$f(x_0) = 0 (mod \: b), |x_0| \le X$}.
     
     \begin{enumerate}
-      \item Вычислить {$m = \lceil \frac{\beta^2}{\delta \epsilon} \rceil$} и {$t = \lfloor \delta m (\frac{1}{\beta} - 1) \rfloor$}
+      \item Вычислить {$m = \lceil \frac{\beta^2}{\delta \epsilon} \rceil$} и {$t = \lfloor \delta m (\frac{1}{\beta} - 1) \rfloor$}.
       \item Вычислить полиномы
 	\begin{equation}
-	   g\textsubscript{{$i,j$}}(x) = x^j N^i f^{m-i}(x), i=0, \dots, m-1, j=0, \dots, \delta-1 
+	   g\textsubscript{{$i,j$}}(x) = x^j N^i f^{m-i}(x), i=0, \dots, m-1, j=0, \dots, \delta-1,
 	\end{equation}
 	
 	\begin{equation}
-	   h_i(x) = x^i f^m(x), i = 0, \dots, t-1
+	   h_i(x) = x^i f^m(x), i = 0, \dots, t-1.
 	\end{equation}
 	
       \item Вычислить ограничение {$X = \frac{1}{2} \lceil N^{\frac{\beta^2}{\delta} - \epsilon} \rceil$}. Построить базис {$B$} решетки,
-	где векторы базиса являются коэффициентами {$g\textsubscript{{$i,j$}}(x X)$} и {$h_i(x X)$}
+	где векторы базиса являются коэффициентами {$g\textsubscript{{$i,j$}}(x X)$} и {$h_i(x X)$}.
       \item Применить \textit{LLL-алгоритм} к базису {$B$} решетки. Пусть {$\nu$} - вектор кратчайшей длинны в \textit{LLL-приведенном} базисе. Вектор {$\nu$}
 	является коэффициент-вектором полинома {$g(xX)$}. Построить полином {$g(x)$}.
-      \item Найти множество {$R$} решений {$g(x)$} над целыми числами. Для каждого корня {$x_0 \in R$} проверить условие НОД{$(N, f(x_0)) \ge N^\beta$}, 
-	если условие не выполняется, то необходимо исключить {$x_0$} из {$R$}
+      \item Найти множество {$R$} целых решений {$g(x) = 0$}. Для каждого корня {$x_0 \in R$} проверить условие НОД{$(N, f(x_0)) \ge N^\beta$}
+      , если условие не выполняется, то необходимо исключить {$x_0$} из {$R$}.
     \end{enumerate}    
