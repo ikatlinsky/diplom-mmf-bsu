@@ -1,4 +1,4 @@
-\documentclass[10pt,pdf,hyperref={unicode}]{beamer}
+\documentclass[14pt,pdf,hyperref={unicode}]{beamer}
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
@@ -8,6 +8,25 @@
 \usetheme{Warsaw}
 \usecolortheme{orchid}
 
+% Remove navigation controls
+\setbeamertemplate{navigation symbols}{}
+
+% Page numbering using following template {current_page}/{total_pages}
+\defbeamertemplate*{footline}{Warsaw} {
+	\leavevmode
+	\hbox{
+	\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm]{author in head/foot}%
+	\insertframenumber{}/\inserttotalframenumber{}
+	\hfill\insertshortauthor
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm]{title in head/foot}%
+	\usebeamerfont{title in head/foot}\insertshorttitle
+	\end{beamercolorbox}
+	}
+	\vskip0pt
+}
+
+\setbeamercovered{transparent}
 
 \begin{document}
 \title{Анализ криптосистемы RSA}
@@ -25,54 +44,12 @@
 
 \frame{\titlepage} 
 
-\begin{frame}{Введение в проблему}
-	\begin{center}
-		Введение в проблему 
-	\end{center}
-\end{frame}
+\input{DiplomProjectPresentation-Task}
 
-\begin{frame}{Постановка задачи}
-	\pause
+\input{DiplomProjectPresentation-Done}
 
-		\begin{block}{1}
-			
-		\end{block}
+\input{DiplomProjectPresentation-Conclusion}
 
-	\pause
-
-		\begin{block}{2}
-		
-		\end{block}
-
-	\pause
-
-		\begin{block}{3}
-		
-		\end{block}
-\end{frame}
-
-\begin{frame}{Задача 1}
-	\begin{center}
-		Задача 1 
-	\end{center}
-\end{frame}
-
-\begin{frame}{Задача 2}
-	\begin{center}
-		Задача 2 
-	\end{center}
-\end{frame}
-
-\begin{frame}{Задача 3}
-	\begin{center}
-		Задача 3 
-	\end{center}
-\end{frame}
-
-\begin{frame}{Результаты}
-	\begin{center}
-		Результаты
-	\end{center}
-\end{frame}
+\frame{\titlepage} 
 
 \end{document}
