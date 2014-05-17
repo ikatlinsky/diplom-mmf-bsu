@@ -1,12 +1,19 @@
-\documentclass[14pt,pdf,hyperref={unicode}]{beamer}
+\documentclass[13pt,pdf,hyperref={unicode}]{beamer}
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
 \usepackage{amssymb,amsfonts,amsmath,mathtext}
 \usepackage{cite,enumerate,float,indentfirst}
+\usepackage{booktabs}
+\usepackage{scrextend}
 
 \usetheme{Warsaw}
 \usecolortheme{orchid}
+
+\newenvironment{importantblock}[3]{%
+  \setbeamercolor{block body}{#2}
+  \setbeamercolor{block title}{#3}
+  \begin{block}{#1}}{\end{block}}
 
 % Remove navigation controls
 \setbeamertemplate{navigation symbols}{}

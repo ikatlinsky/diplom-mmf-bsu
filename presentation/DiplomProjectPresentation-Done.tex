@@ -1,34 +1,85 @@
 % !TEX root = DiplomProjectPresentation.tex
 
-\begin{frame}{Систематизация информации}
-	\begin{block}{1}
-		Изучены известные результаты.
-	\end{block}
-
-	\begin{block}{2}
-		Разобраны и изучены принципы криптосистемы RSA.
-	\end{block}
-
-	\begin{block}{3}
-		Произведен криптоанализ RSA.
-	\end{block}
-\end{frame}
-
-\begin{frame}{Известные результаты}
-	\begin{center}
-		Табличка со взломами RSA ключей!?	 
-	\end{center}
-\end{frame}
-
 \begin{frame}{Принципы криптосистемы RSA}
 	\begin{center}
 		\begin{itemize}
-			\item Криптосистемы с открытым ключом.
-	        \item Простые числа - тесты и генерация.
-	        \item Факторизация чисел.
+			\item Криптосистемы с открытым ключом. \vspace{0.5cm}
+	        \item Простые числа - тесты и генерация. \vspace{0.5cm}
+	        \item Факторизация чисел. \vspace{0.5cm}
 	        \item Алгоритмы шифрования, дешифрования, создание ключей.
     	\end{itemize}
 	\end{center}
+\end{frame}
+
+\begin{frame}{Построение больших простых чисел}
+	\begin{block}{Методы}
+		\begin{itemize}
+			\item Тест Миллера-Рабина - тест чисел на простоту 
+			\item Теорема Диемитко - построение простых чисел        
+		\end{itemize}	
+	\end{block}
+
+	\begin{importantblock}{Теорема Диемитко}{}{bg=blue}
+		Пусть {$n = q R + 1$}, где {$q$} - простое число, {$R$} - четное, {$R < 4(q + 1)$}. Если найдется {$a < n$}:
+      
+			\begin{enumerate}
+			 \item {$a^{n - 1} \equiv 1(mod \: n)$}
+			 \item {$a^{\frac{n - 1}{q}} \not\equiv 1(mod \: n)$}
+			\end{enumerate}
+			
+      то {$n$} – простое число.
+	\end{importantblock}
+\end{frame}
+
+\begin{frame}{Построение больших простых чисел}
+		\begin{center}
+			\begin{block}{Сравнение методов}
+			\centering
+			\resizebox{\linewidth}{!}{
+			\begin{tabular}{cccc}	  
+			    \toprule  
+			    \textbf{Метод} & \textbf{Вероятностный} & \textbf{Точный} & \textbf{Полиномиальный} \\
+			    \midrule
+			    Миллер-Рабин        & +           & -                & +             \\
+			    Диемитко            & -           & +                & +             \\		    
+			    \bottomrule
+			\end{tabular} 	
+			}
+		\end{block} \vspace{0.3cm}
+
+		{\LARGE Выводы } \vspace{0.3cm}
+
+		Алгоритм, основанный на теореме Диемитко, больше подходит для криптосистемы RSA
+
+		\begin{itemize}
+			\item Строит большие простые числа, а не тестирует
+			\item Полиномиальный
+			\item Всегда дает точный результат
+		\end{itemize}
+	\end{center}	
+\end{frame}
+
+\begin{frame}{Алгоритмы факторизации}
+	\begin{block}{Экспоненциальные алгоритмы}
+		\begin{itemize}
+			\item Перебор возможных делителей - {$O(N\textsuperscript{{$\frac{1}{2}$}})$}
+			\item метод факторизации Ферма - {$O(N\textsuperscript{{$\frac{1}{4}$}})$}
+	        \item {$\rho$}-алгоритм Полларда - {$O(N\textsuperscript{{$\frac{1}{4}$}})$}	        
+    	\end{itemize}
+	\end{block}
+
+	\begin{center}
+		$L_N(\alpha,c)=O(exp((c+o(1))(logN)^\alpha(loglogN)\textsuperscript{{$1-\alpha$}}))$
+	\end{center}
+
+	\begin{block}{Субэкспоненциальные алгоритмы}
+		\begin{itemize}
+			\item Алгоритм Диксона - {$L_N(\frac{1}{2}, 2\sqrt{2})$}
+	        \item Метод непрерывных дробей - {$L_N(\frac{1}{2}, \sqrt{2})$}
+	        \item Метод квадратичного решета - {$L_N(\frac{1}{2}, 1)$}
+	        \item Метод решета числового поля - {$L_N(\frac{1}{3}, (\frac{64}{9})^\frac{1}{3})$} 
+    	\end{itemize}
+	\end{block}
 \end{frame}
 
 \begin{frame}{Криптоанализ RSA}
@@ -36,31 +87,48 @@
 
 		\begin{block}{Подходы к криптоанализу}
 			\begin{itemize}
-		        \item Разложение $N$ на простые множители $p$ и $q$
-		        \item Определение $\phi(N)$ без $p$ и $q$
+		        \item Разложение $N$ на простые множители $p$ и $q$ \vspace{0.5cm}
+		        \item Определение $\phi(N)$ без $p$ и $q$ \vspace{0.5cm}
 		        \item Определение $d$ без $\phi(N)$
     		\end{itemize}
-		\end{block}	 		 
+		\end{block}	 		
+
+		$\Downarrow$
+
+	 	\begin{block}{Реализация подходов}
+	 		\begin{itemize}
+		        \item Простой перебор
+		        \item Математический подход
+    		\end{itemize}
+	 	\end{block}	
     
 	\end{center}
 \end{frame}
 
 \begin{frame}{Криптоанализ RSA}			
 
-	\begin{block}{Теорема Копперсмита}
-		Взлом криптосистемы RSA при известной аппроксимации
-	\end{block}	 
+	\changefontsizes{10pt}
+
+	\begin{importantblock}{Теорема Копперсмита}{}{bg=blue}
+		Пусть $N$ - целое число, факторизация которого неизвестна и которое имеет делитель {$b \ge N^\beta, 0 < \beta \le 1$}. Пусть {$f(x)$} - 
+		унитарный многочлен от одной переменной степени {$\delta$} и {$c \ge 1$}, тогда можно найти все решения {$x_0$} уравнения
+		    \begin{equation}
+		      f(x) \equiv 0(mod \: b), |x_0| \le c N^{\frac{\beta^2}{\delta}}
+		    \end{equation}
+		за время {$O(c \delta^5 log^9 N)$}.
+	\end{importantblock}	 
 	
 	\begin{block}{Факторизация}
 		Дано: $N = p \: q$ \\
 		Найти: $p$
-	\end{block}
-	
+	\end{block}	
 
 	\begin{block}{Факторизация + аппроксимация}
 		Дано: $N = p \: q$, $p': |p-p'| \le N^\frac{1}{4}$ \\
 		Найти: $p$
 	\end{block}		 
+
+	\changefontsizes{13pt}
 	
 \end{frame}
 
@@ -76,7 +144,8 @@
 	        \item Генерация больших простых чисел
 	        \item Алгоритмы факторизации
 	        \item Алгоритмы шифрования и дешифрования
-	        \item LLL-алгоритм + теорема Копперсита и их приложения
+	        \item LLL-алгоритм + теорема Копперсита
+	        \item Криптоатаки на шифр RSA
 		\end{itemize}
 	\end{block}	 
 	
